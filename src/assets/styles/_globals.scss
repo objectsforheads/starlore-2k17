@@ -1,0 +1,17 @@
+$g-font-family_heading: 'upheaval', sans-serif;
+$g-font-family_body: 'romulus', serif;
+$g-line-height: 1.33;
+
+$g-palette_primary-white: #eee;
+$g-palette_primary-dark:  #03080D;
+
+// ensures we keep crisp pixel scaling
+@mixin m-heading-text($multiplier) {
+  font-family: $g-font-family_heading;
+  font-size: #{$multiplier * 20rem};
+}
+
+@mixin m-body-text($multiplier: 3) {
+  font-family: $g-font-family_body;
+  font-size: #{$multiplier * 9rem};
+}
