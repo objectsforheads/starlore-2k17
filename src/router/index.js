@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import startScreen from '@/layouts/startScreen';
+import start from '@/screens/start';
 
 Vue.use(Router);
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'startScreen',
-      component: startScreen,
+      name: 'start',
+      component: start,
     },
   ],
 });
