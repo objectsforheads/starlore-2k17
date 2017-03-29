@@ -48,5 +48,10 @@
     color: $g-palette_primary-white;
     text-transform: uppercase;
     text-decoration: none;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
   }
 </style>
