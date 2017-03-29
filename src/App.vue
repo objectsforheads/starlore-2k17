@@ -13,6 +13,7 @@ export default {
 <style lang="scss">
 @import 'node_modules/reset-css/_reset';
 @import './assets/styles/_globals';
+@import './assets/styles/_animations';
 
 *, *::before, *::after {
   position: relative;
@@ -69,14 +70,5 @@ h1, h2, h3, h4, h5, h6,
 html, body {
   font-size: 1px;
   font-family: $g-font-family_body;
-}
-
-@keyframes blink {
-  0% { visibility: visible; }
-  50% { visibility: hidden; }
-  100% { visibility: visible; }
-}
-.m-blink {
-  animation: blink steps(1) 750ms infinite alternate;
 }
 </style>

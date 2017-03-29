@@ -7,9 +7,9 @@
       <span class="byline">
         a small game by objectsforheads
       </span>
-      <a href="#" class="start-button a_pressStart">
-        <span class="m-blink actionable">Press Start</span>
-      </a>
+      <router-link to="/campground" class="start-button a_pressStart">
+        <span class="a-blink actionable">Press Start</span>
+      </router-link>
     </div>
   </div>
 </template>
