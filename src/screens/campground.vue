@@ -1,6 +1,10 @@
 <template>
   <div class="campground">
-    <h1>stuff</h1>
+    <div class="sprite">
+      <div class="fire">
+
+      </div>
+    </div>
   </div>
 </template>
 

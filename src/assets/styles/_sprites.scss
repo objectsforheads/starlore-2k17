@@ -8,3 +8,22 @@
     }
   }
 }
+
+.sprite {
+  .fire {
+    width: 23em;
+    height: 17em;
+    background: url('./assets/images/sprite_fire.png') -184em 0 no-repeat transparent;
+    animation: fireGoing steps(1) 450ms infinite alternate;
+    background-size: 322em 17em;
+  }
+}
+
+@keyframes fireGoing {
+  0% { background-position: -161em 0; }
+  20% { background-position: -184em 0; }
+  40% { background-position: -207em 0; }
+  60% { background-position: -230em 0; }
+  80% { background-position: -253em 0; }
+  100% { background-position: -276em 0; }
+}
