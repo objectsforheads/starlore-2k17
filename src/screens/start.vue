@@ -18,6 +18,19 @@
   // HACK really need a better way to import variables
   @import '../assets/styles/_globals';
 
+  [class*="-enter-active"] {
+    animation: slideInUp 500ms;
+  }
+
+  [class*="-leave-active"] {
+    animation: slideOutUp 500ms;
+    animation-delay: 500ms;
+
+    .a-blink {
+      animation-duration: 150ms;
+    }
+  }
+
   .start-screen {
     // Puts the main button closer to the center line
     // so that the screeen doesn't look so weighed to the bottom

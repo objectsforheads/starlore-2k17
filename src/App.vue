@@ -1,6 +1,8 @@
 <template>
   <main id="app">
-    <router-view></router-view>
+    <transition name="changeover" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </main>
 </template>
 
