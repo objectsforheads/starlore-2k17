@@ -1,0 +1,10 @@
+// By default, the sprite assets shouuld be scaled x2 global
+// Just in case this needs tweaking though, here are scaling styles
+
+@for $i from 1 through 4 {
+  .scale-#{$i} {
+    .sprite {
+      font-size: #{$i}rem;
+    }
+  }
+}

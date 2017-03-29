@@ -1,5 +1,5 @@
 <template>
-  <main id="app">
+  <main id="app" v-bind:class="'scale-' + scale">
     <transition name="changeover" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -9,6 +9,11 @@
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      scale: 2,
+    };
+  },
 };
 </script>
 
@@ -16,6 +21,7 @@ export default {
 @import 'node_modules/reset-css/_reset';
 @import './assets/styles/_globals';
 @import './assets/styles/_animations';
+@import './assets/styles/_sprites';
 
 *, *::before, *::after {
   position: relative;
