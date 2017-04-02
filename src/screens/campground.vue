@@ -1,10 +1,11 @@
 <template>
   <div class="campground">
-    <div class="sprite">
-      <div class="fire">
-
+    <div class="foreground">
+      <div class="sprite">
+        <div class="fire"></div>
       </div>
     </div>
+    <game-cli></game-cli>
   </div>
 </template>
 
