@@ -96,6 +96,11 @@ export default {
           name: 'completeTutorial',
           verbs: ['kindle', 'start', 'stoke'],
           nouns: ['fire'],
+          qualifier: {
+            state: {
+              isTutorial: true
+            }
+          },
           success: {
             outputter: 'event',
             output: 'You {verb} the {noun}',

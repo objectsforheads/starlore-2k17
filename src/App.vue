@@ -7,8 +7,12 @@
 </template>
 
 <script>
+/* eslint-disable */
+import store from './router/store';
+
 export default {
   name: 'app',
+  store,
   data() {
     return {
       scale: 2,
