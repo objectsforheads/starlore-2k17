@@ -25,6 +25,64 @@ export default {
       cli.windowKeypress(e)
     })
   },
+  computed: {
+    nounMatchedCommands: function() {
+      let input = this.command;
+
+      let filtered = this.commands.filter(function(command) {
+        let match = false;
+        command.nouns.forEach(function(noun) {
+          if (input.indexOf(noun) > -1) {
+            match = true;
+          }
+        })
+        return match;
+      })
+
+      return filtered[0];
+    },
+    verbMatchedCommands: function() {
+      let input = this.command;
+
+      let filtered = this.commands.filter(function(command) {
+        let match = false;
+        command.verbs.forEach(function(verb) {
+          if (input.indexOf(verb) > -1) {
+            match = true;
+          }
+        })
+        return match;
+      })
+
+      return filtered[0];
+    },
+    matchedCommands: function() {
+      let cli = this;
+      let input = cli.command;
+
+      let filtered = cli.commands.filter(function(command) {
+        let nounMatched = false;
+        command.nouns.forEach(function(noun) {
+          if (input.indexOf(noun) > -1) {
+            nounMatched = true;
+          }
+        })
+
+        let verbMatched = false;
+        command.verbs.forEach(function(verb) {
+          if (input.indexOf(verb) > -1) {
+            verbMatched = true;
+          }
+        })
+
+        if (nounMatched && verbMatched) {
+          return true;
+        }
+        return false;
+      })
+      return filtered[0];
+    },
+  },
   data() {
     return {
       log: [
@@ -33,30 +91,40 @@ export default {
         }
       ],
       command: null,
-      dictionary: {
-        kindle: {
-          fire: {
-            action: 'kindleFire',
-            line: {
-              outputter: 'event',
-              text: 'You KINDLE the FIRE'
-            }
+      commands: [
+        {
+          name: 'completeTutorial',
+          verbs: ['kindle', 'start', 'stoke'],
+          nouns: ['fire'],
+          success: {
+            outputter: 'event',
+            output: 'You {verb} the {noun}',
           },
           error: {
-            outputter: 'Dad',
-            text: 'I don\'t think you can KINDLE that, Scout!'
+            verb: {
+              outputter: 'Dad',
+              output: 'I don\'t think you can {verb} that, Scout!'
+            },
+            noun: {
+              outputter: 'Dad',
+              output: 'I don\'t think that\'s going to help the {noun}, Scout!'
+            }
+          },
+          resolution: function() {
+            console.log('finished tutorial!')
           }
         },
-        feed: {
-          squirrel: {
-            action: 'feedSquirrel',
-            line: {
-              outputter: 'event',
-              text: 'You FEED the SQUIRREL. It does not break eye contact while it eats your offering. You must look away.'
-            }
-          }
+        {
+          name: 'getHint',
+          verbs: ['talk', 'ask'],
+          nouns: ['dad'],
+        },
+        {
+          name: 'seeProgress',
+          verbs: ['read', 'consult'],
+          nouns: ['manual', 'handbook'],
         }
-      }
+      ]
     }
   },
   methods: {
@@ -71,6 +139,7 @@ export default {
         }
       }
       else if (e.key === 'Backspace') {
+        e.preventDefault();
         cli.command = cli.command.slice(0, -1);
       }
       else if (e.key === 'Enter') {
@@ -87,43 +156,101 @@ export default {
 
       // Force everything into lowercase
       let command = cli.command.toLowerCase();
-      let resolver = [];
-      let dictionary = cli.dictionary;
 
-      // Check if a verb matches
-      for (var verb in dictionary) {
-        if (command.indexOf(verb) > -1) {
-          // If it matches, push it to resolver
-          resolver.push(verb);
+      if (cli.matchedCommands) {
+        let action = cli.matchedCommands;
+        let output = (' ' + action.success.output).slice(1);
 
-          // Then check if a noun matches too
-          for (var noun in dictionary[verb]) {
-            // Push match to resolver
-            if (command.indexOf(noun) > -1) {
-              resolver.push(noun);
-            }
+        let wordOrder = [];
+
+        let verb = action.verbs.reduce(function(a, b) {
+          if (command.indexOf(b) > -1) {
+            a = b;
+            wordOrder.push(command.indexOf(b));
           }
-        }
-      }
+          return a;
+        }, null)
+        let noun = action.nouns.reduce(function(a, b) {
+          if (command.indexOf(b) > -1) {
+            a = b;
+            wordOrder.push(command.indexOf(b));
+          }
+          return a;
+        }, null)
 
-      // if resolver length is 1, verb resolved but noun did not
-      // Show the verb error message
-      if (resolver.length === 1) {
-        dictionary[resolver[0]].error ? cli.log.push(dictionary[resolver[0]].error) : cli.log.push({
-          outputter: 'Dad',
-          text: 'You\'re onto something, Scout!'
-        })
+        // Make sure words were entered in verb -> noun order
+        if (wordOrder[0] > wordOrder[1]) {
+          return cli.outputToCLI(
+            'Dad',
+            'Sorry, Scout, we don\'t speak in tongues in this household!'
+          );
+        }
+
+        // Parse the output if necessary
+        if ( /{.*?}/.test(action.success.output) ) {
+          output = output.replace('{verb}', verb.toUpperCase());
+          output = output.replace('{noun}', noun.toUpperCase());
+        }
+
+        return cli.outputToCLI(
+          action.success.outputter,
+          output,
+          action.resolution);
       }
-      // run resolution function if verb and noun resolved
-      else if (resolver.length === 2) {
-        cli.log.push(dictionary[resolver[0]][resolver[1]].line)
+      else if (cli.verbMatchedCommands) {
+        let action = cli.verbMatchedCommands;
+        let output = (' ' + action.error.verb.output).slice(1);
+
+        if ( /{.*?}/.test(output) ) {
+          let verb = action.verbs.reduce(function(a, b) {
+            if (command.indexOf(b) > -1) {
+              a = b;
+            }
+            return a;
+          }, null)
+
+          output = output.replace('{verb}', verb.toUpperCase());
+        }
+
+        return cli.outputToCLI(
+          action.error.verb.outputter,
+          output);
       }
-      // respond with a generic "Did not understand" otherwise
-      else {
-        cli.log.push({
-          outputter: 'event',
-          text: 'Dad looks at you funny.'
-        })
+      else if (cli.nounMatchedCommands) {
+        let action = cli.nounMatchedCommands;
+        let output = (' ' + action.error.noun.output).slice(1);
+
+        if ( /{.*?}/.test(output) ) {
+          let noun = action.nouns.reduce(function(a, b) {
+            if (command.indexOf(b) > -1) {
+              a = b;
+            }
+            return a;
+          }, null)
+
+          output = output.replace('{noun}', noun.toUpperCase());
+        }
+
+        return cli.outputToCLI(
+          action.error.verb.outputter,
+          output);
+      } else {
+        return cli.outputToCLI(
+          'event',
+          'Dad looks at you funny'
+        )
+      }
+    },
+    outputToCLI: function(outputter, output, resolution) {
+      let cli = this;
+
+      cli.log.push({
+        outputter: outputter,
+        text: output
+      })
+
+      if (resolution) {
+        resolution();
       }
 
       // reset the command after resolution
