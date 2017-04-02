@@ -1,5 +1,5 @@
 <template>
-  <main id="app" v-bind:class="'scale-' + scale">
+  <main id="app" v-bind:class="'game scale-' + scale">
     <transition name="changeover" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -78,5 +78,10 @@ h1, h2, h3, h4, h5, h6,
 html, body {
   font-size: 1px;
   font-family: $g-font-family_body;
+}
+
+.game {
+  @include m-body-text();
+  line-height: 1.33;
 }
 </style>
