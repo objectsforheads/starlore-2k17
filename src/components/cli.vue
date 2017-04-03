@@ -113,10 +113,17 @@ export default {
             noun: {
               outputter: 'Dad',
               output: 'I don\'t think that\'s going to help the {noun}, Scout!'
+            },
+            qualifier: {
+              outputter: 'Dad',
+              output: 'The {noun} is already going, Scout! No need to fiddle around with it anymore.'
             }
           },
-          resolution: function() {
-            console.log('finished tutorial!')
+          resolution: function(cli) {
+            cli.$store.commit('booleanToggle', {
+              qualifier: 'isTutorial',
+              boolean: false
+            })
           }
         },
         {
@@ -166,41 +173,90 @@ export default {
         let action = cli.matchedCommands;
         let output = (' ' + action.success.output).slice(1);
 
-        let wordOrder = [];
+        if (qualifyState(action.qualifier, cli.$store)) {
+          let wordOrder = [];
 
-        let verb = action.verbs.reduce(function(a, b) {
-          if (command.indexOf(b) > -1) {
-            a = b;
-            wordOrder.push(command.indexOf(b));
-          }
-          return a;
-        }, null)
-        let noun = action.nouns.reduce(function(a, b) {
-          if (command.indexOf(b) > -1) {
-            a = b;
-            wordOrder.push(command.indexOf(b));
-          }
-          return a;
-        }, null)
+          let verb = action.verbs.reduce(function(a, b) {
+            if (command.indexOf(b) > -1) {
+              a = b;
+              wordOrder.push(command.indexOf(b));
+            }
+            return a;
+          }, null)
+          let noun = action.nouns.reduce(function(a, b) {
+            if (command.indexOf(b) > -1) {
+              a = b;
+              wordOrder.push(command.indexOf(b));
+            }
+            return a;
+          }, null)
 
-        // Make sure words were entered in verb -> noun order
-        if (wordOrder[0] > wordOrder[1]) {
+          // Make sure words were entered in verb -> noun order
+          if (wordOrder[0] > wordOrder[1]) {
+            return cli.outputToCLI(
+              'Dad',
+              'Sorry, Scout, we don\'t speak in tongues in this household!'
+            );
+          }
+
+          // Parse the output if necessary
+          if ( /{.*?}/.test(action.success.output) ) {
+            output = output.replace('{verb}', verb.toUpperCase());
+            output = output.replace('{noun}', noun.toUpperCase());
+          }
+
           return cli.outputToCLI(
-            'Dad',
-            'Sorry, Scout, we don\'t speak in tongues in this household!'
-          );
+            action.success.outputter,
+            output,
+            action.resolution);
+        } else {
+          let wordOrder = [];
+          let verb = action.verbs.reduce(function(a, b) {
+            if (command.indexOf(b) > -1) {
+              a = b;
+              wordOrder.push(command.indexOf(b));
+            }
+            return a;
+          }, null)
+          let noun = action.nouns.reduce(function(a, b) {
+            if (command.indexOf(b) > -1) {
+              a = b;
+              wordOrder.push(command.indexOf(b));
+            }
+            return a;
+          }, null)
+
+          output = (' ' + action.error.qualifier.output).slice(1);
+          if ( /{.*?}/.test(output) ) {
+            output = output.replace('{verb}', verb.toUpperCase());
+            output = output.replace('{noun}', noun.toUpperCase());
+          }
+          return cli.outputToCLI(
+            action.error.qualifier.outputter,
+            output);
         }
 
-        // Parse the output if necessary
-        if ( /{.*?}/.test(action.success.output) ) {
-          output = output.replace('{verb}', verb.toUpperCase());
-          output = output.replace('{noun}', noun.toUpperCase());
-        }
+        function qualifyState(reqs, current) {
+          // Accumulate qualifications to reduce later
+          let qualifications = [];
+          // Loop recursively through each req in the reqs object
+          // Comparing it to the current state object and checking for a match
+          for (var req in reqs) {
+            if (typeof reqs[req] === 'object' && typeof current[req] === 'object') {
+              qualifications = qualifications.concat(qualifyState(reqs[req], current[req]))
+            } else {
+              qualifications.push(reqs[req] === current[req]);
+            }
+          }
 
-        return cli.outputToCLI(
-          action.success.outputter,
-          output,
-          action.resolution);
+          // Reduce qualifications to a boolean
+          return qualifications.reduce(function(a, b) {
+            if (b === false || typeof b !== 'boolean') {
+              a = false;
+            }
+            return a;
+          }, true)
+        }
       }
       else if (cli.verbMatchedCommands) {
         let action = cli.verbMatchedCommands;
@@ -255,7 +311,7 @@ export default {
       })
 
       if (resolution) {
-        resolution();
+        resolution(cli);
       }
 
       // reset the command after resolution
