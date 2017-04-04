@@ -39,7 +39,7 @@ export default {
         return match;
       })
 
-      return filtered[0];
+      return filtered;
     },
     verbMatchedCommands: function() {
       let input = this.command;
@@ -54,7 +54,7 @@ export default {
         return match;
       })
 
-      return filtered[0];
+      return filtered;
     },
     matchedCommands: function() {
       let cli = this;
@@ -80,7 +80,7 @@ export default {
         }
         return false;
       })
-      return filtered[0];
+      return filtered;
     },
   },
   data() {
@@ -101,23 +101,31 @@ export default {
               isTutorial: true
             }
           },
-          success: {
-            outputter: 'event',
-            output: 'You {verb} the {noun}',
-          },
-          error: {
-            verb: {
-              outputter: 'Dad',
-              output: 'I don\'t think you can {verb} that, Scout!'
-            },
-            noun: {
-              outputter: 'Dad',
-              output: 'I don\'t think that\'s going to help the {noun}, Scout!'
-            },
-            qualifier: {
-              outputter: 'Dad',
-              output: 'The {noun} is already going, Scout! No need to fiddle around with it anymore.'
+          success: [
+            {
+              outputter: 'event',
+              output: 'You {verb} the {noun}',
             }
+          ],
+          error: {
+            verb: [
+              {
+                outputter: 'Dad',
+                output: 'I don\'t think you can {verb} that, Scout!'
+              }
+            ],
+            noun: [
+              {
+                outputter: 'Dad',
+                output: 'I don\'t think that\'s going to help the {noun}, Scout!'
+              }
+            ],
+            qualifier: [
+              {
+                outputter: 'Dad',
+                output: 'The {noun} is already going, Scout! No need to fiddle around with it anymore.'
+              }
+            ]
           },
           resolution: function(cli) {
             cli.$store.commit('booleanToggle', {
@@ -125,6 +133,75 @@ export default {
               boolean: false
             })
           }
+        },
+        {
+          name: 'squirrelQuest_1',
+          verbs: ['feed'],
+          nouns: ['squirrel'],
+          qualifier: {
+            state: {
+              squirrelQuest: true,
+              squirrelDebt: false
+            }
+          },
+          success: [
+            {
+              outputter: 'event',
+              output: 'You {verb} the {noun}',
+            }
+          ],
+          error: {
+            verb: [
+              {
+                outputter: 'Dad',
+                output: 'Maybe you don\'t {verb} that, Scout.'
+              }
+            ],
+            noun: [
+              {
+                outputter: 'event',
+                output: 'The {noun} squeaks angrily at you.'
+              },
+              {
+                outputter: 'Squirrel',
+                output: '.-- .... .- - / - .-. .. -.-. -.- . .-. -.-- / .. ... / - .... .. ... ..--.. / -... . --. --- -. . .-.-.-'
+              }
+            ]
+          },
+          resolution: function(cli) {
+            cli.$store.commit('counterIncrement', {
+              qualifier: 'squirrelDebtCounter',
+              increment: 1
+            })
+
+            if (cli.$store.state.squirrelDebtCounter >= 5) {
+              cli.$store.commit('booleanToggle', {
+                qualifier: 'squirrelDebt',
+                boolean: true
+              })
+            }
+          }
+        },
+        {
+          name: 'squirrelQuest_2',
+          verbs: ['feed'],
+          nouns: ['squirrel'],
+          qualifier: {
+            state: {
+              squirrelQuest: true,
+              squirrelDebt: true
+            }
+          },
+          success: [
+            {
+              outputter: 'event',
+              output: 'Eh? What\'s this? The squirrel appears to be talking to you. But squirrels can\'t talk...can they?'
+            },
+            {
+              outputter: 'Squirrel',
+              output: '... -- .- .-.. .-.. / .... ..- -- .- -. .-.-.- / -.-- --- ..- .-. / --- ..-. ..-. . .-. .. -. --. ... / .-- .. .-.. .-.. / ... .- ...- . / -- -.-- / .--. . --- .--. .-.. . / ..-. .-. --- -- / .- / .... .- .-. ... .... / .-- .. -. - . .-. / .- -. -.. / - .... .. ... / -.. . -... - / .-- .. .-.. .-.. / -. --- - / .-. . -- .- .. -. / ..- -. .--. .- .. -.. .-.-.- / .. / ... .-- . .- .-. / - --- / -.-- --- ..- --..-- / ... -- .- .-.. .-.. / .... ..- -- .- -. --..-- / - .... .- - / .-- .... . -. / -.-- --- ..- .-. / -.. .- .-. -.- . ... - / .... --- ..- .-. / -.-. --- -- . ... --..-- / .. / ... .... .- .-.. .-.. / ... - .- -. -.. / .-. . .- -.. -.-- / .- - / - .... . / ...- .- -. --. ..- .- .-. -.. .-.-.- / -... ..- - / ..-. --- .-. / -. --- .-- --..-- / .. / -- ..- ... - / --. --- --..-- / ..-. --- .-. / -- -.-- / .--. . --- .--. .-.. . / -. . . -.. / -- . .-.-.-'
+            }
+          ]
         },
         {
           name: 'getHint',
@@ -169,64 +246,102 @@ export default {
       // Force everything into lowercase
       let command = cli.command.toLowerCase();
 
-      if (cli.matchedCommands) {
-        let action = cli.matchedCommands;
-
-        // Return an error if we're not in the right game state to input this command
-        if (qualifyState(action.qualifier, cli.$store) === false) {
-          return cli.outputToCLI(
-            action.error.qualifier.outputter,
-            parseOutput(action, action.error.qualifier.output)
-          );
-        }
-
-        // Return an error if the words weren't input in verb -> noun order
-        let wordOrder = [];
-        action.verbs.forEach(function(verb) {
-          if (command.indexOf(verb) > -1) {
-            wordOrder.push(command.indexOf(verb));
+      if (cli.matchedCommands.length > 0) {
+        // Look for a qualified action
+        let action = cli.matchedCommands.filter(function(command) {
+          if (qualifyState(command.qualifier, cli.$store)) {
+            return true;
           }
-        })
-        action.nouns.forEach(function(noun) {
-          if (command.indexOf(noun) > -1) {
-            wordOrder.push(command.indexOf(noun));
+          return false;
+        })[0];
+
+        if (action) {
+          // Return an error if the words weren't input in verb -> noun order
+          let wordOrder = [];
+          action.verbs.forEach(function(verb) {
+            if (command.indexOf(verb) > -1) {
+              wordOrder.push(command.indexOf(verb));
+            }
+          })
+          action.nouns.forEach(function(noun) {
+            if (command.indexOf(noun) > -1) {
+              wordOrder.push(command.indexOf(noun));
+            }
+          })
+
+          if (wordOrder[0] > wordOrder[1]) {
+            return cli.outputToCLI(
+              'Dad',
+              'Sorry, Scout, we don\'t speak in tongues in this household!'
+            );
           }
-        })
 
-        if (wordOrder[0] > wordOrder[1]) {
-          return cli.outputToCLI(
-            'Dad',
-            'Sorry, Scout, we don\'t speak in tongues in this household!'
-          );
+          // All clear, return the command and resolver
+          return action.success.forEach(function(output, i) {
+            if (i < action.success.length - 1) {
+              return cli.outputToCLI(
+                output.outputter,
+                parseOutput(action, output.output)
+              )
+            } else {
+              return cli.outputToCLI(
+                output.outputter,
+                parseOutput(action, output.output),
+                action.resolution
+              )
+            }
+          })
+        } else {
+          // Return the first unqualified error
+          action = cli.matchedCommands.filter(function(command) {
+            if (typeof command.error !== 'undefined' && typeof command.error.qualifier !== 'undefined') {
+              return true;
+            }
+            return false;
+          })[0];
+          if (action) {
+            return action.error.qualifier.forEach(function(output) {
+              return cli.outputToCLI(
+                output.outputter,
+                parseOutput(action, output.output)
+              )
+            });
+          } else {
+            return cli.outputToCLI(
+              'event',
+              'This is not working.'
+            )
+          }
+
         }
-
-        // All clear, return the command and resolver
-        return cli.outputToCLI(
-          action.success.outputter,
-          parseOutput(action, action.success.output),
-          action.resolution);
       }
 
-      if (cli.verbMatchedCommands || cli.nounMatchedCommands) {
+      if (cli.verbMatchedCommands.length > 0 || cli.nounMatchedCommands.length > 0) {
         // If we only matched a noun or a verb, return a specific error if it exists
-        let outputter = 'Dad';
-        let output = 'By Jove, I think you\'re onto something, Scout!';
-
-        if (cli.verbMatchedCommands && cli.verbMatchedCommands.error) {
-          let action = cli.verbMatchedCommands;
-          outputter = action.error.outputter;
-          output = parseOutput(action, action.error.verb.output);
+        if (cli.verbMatchedCommands.length > 0 && cli.verbMatchedCommands[0].error) {
+          let action = cli.verbMatchedCommands[0];
+          return action.error.verb.forEach(function(output) {
+            return cli.outputToCLI(
+              output.outputter,
+              parseOutput(action, output.output)
+            )
+          })
         }
-        if (cli.nounMatchedCommands && cli.nounMatchedCommands.error) {
-          let action = cli.nounMatchedCommands;
-          outputter = action.error.outputter;
-          output = parsedOutput(action, action.error.noun.output);
+        else if (cli.nounMatchedCommands.length > 0 && cli.nounMatchedCommands[0].error) {
+          let action = cli.nounMatchedCommands[0];
+          return action.error.noun.forEach(function(output) {
+            return cli.outputToCLI(
+              output.outputter,
+              parseOutput(action, output.output)
+            )
+          })
         }
-
-        return cli.outputToCLI(
-          outputter,
-          output
-        );
+        else {
+          return cli.outputToCLI(
+            'Dad',
+            'By Jove, I think you\'re onto something, Scout!'
+          );
+        }
       }
 
       // Return a generic error if there is no specific error to be called

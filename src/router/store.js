@@ -6,6 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isTutorial: true,
+    squirrelQuest: true,
+    squirrelDebt: false,
+    squirrelDebtCounter: 1,
   },
   mutations: {
     booleanToggle(state, payload) {
@@ -15,6 +18,10 @@ export default new Vuex.Store({
       } else {
         currentState[payload.qualifier] = !currentState[payload.qualifier];
       }
+    },
+    counterIncrement(state, payload) {
+      const currentState = state;
+      currentState[payload.qualifier] += payload.increment;
     },
   },
 });
