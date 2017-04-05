@@ -1,9 +1,11 @@
 <template>
   <div class="game-cli">
-    <div v-for="line in log" class="cli__line">
-      <span class="cli__outputter" v-bind:data-outputter="line.outputter"></span>
-      <div class="cli__input">
-        <span class="cli__command">{{ line.text }}</span>
+    <div class="cli__output">
+      <div v-for="line in log" class="cli__line" v-bind:data-is="line.outputter">
+        <span class="cli__outputter" v-bind:data-outputter="line.outputter"></span>
+        <div class="cli__input">
+          <span class="cli__command">{{ line.text }}</span>
+        </div>
       </div>
     </div>
     <div class="cli__line">
@@ -406,6 +408,14 @@ export default {
         resolution(cli);
       }
 
+      cli.$nextTick(function() {
+        let cliOutput = document.getElementsByClassName('cli__output')[0];
+        let cliCommandOutput = document.querySelectorAll('[data-is="command"]');
+        cliCommandOutput = cliCommandOutput[cliCommandOutput.length - 1];
+
+        cliOutput.scrollTop = cliCommandOutput.offsetTop;
+      })
+
       // reset the command after resolution
       return cli.command = null;
     }
@@ -420,10 +430,17 @@ export default {
     left: 0;
     width: 100%;
 
+    max-height: 250rem;
+
     display: flex;
     flex-direction: column;
 
     padding: 0 9rem;
+  }
+
+  .cli__output {
+    flex: 1;
+    overflow: auto;
   }
 
   .cli__outputter {
