@@ -9,14 +9,33 @@
   }
 }
 
-.sprite {
-  .fire {
-    width: 23em;
-    height: 17em;
-    background: url('./assets/images/sprite_fire.png') -184em 0 no-repeat transparent;
+.fire {
+  width: 23em;
+  height: 17em;
+  background: url('./assets/images/sprite_fire.png') -184em 0 no-repeat transparent;
+  background-size: 322em 17em;
+  animation: fireStart steps(1) 1000ms infinite alternate;
+
+  &.lit {
     animation: fireGoing steps(1) 450ms infinite alternate;
-    background-size: 322em 17em;
   }
+}
+
+@keyframes fireStart {
+  0% { background-position: 0em 0; }
+  8% { background-position: -23em 0; }
+  16% { background-position: -46em 0; }
+  24% { background-position: -69em 0; }
+  32% { background-position: -92em 0; }
+  40% { background-position: -115em 0; }
+  48% { background-position: -138em 0; }
+  56% { background-position: -161em 0; }
+  64% { background-position: -184em 0; }
+  72% { background-position: -207em 0; }
+  80% { background-position: -230em 0; }
+  88% { background-position: -253em 0; }
+  96% { background-position: -276em 0; }
+  100% { background-position: -299em 0; }
 }
 
 @keyframes fireGoing {
