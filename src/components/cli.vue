@@ -234,7 +234,9 @@ export default {
         cli.command = cli.command.slice(0, -1);
       }
       else if (e.key === 'Enter') {
-        cli.processCommand();
+        if (cli.command && cli.command.trim().length > 0) {
+          cli.processCommand();
+        }
       }
     },
     processCommand: function() {
@@ -411,9 +413,10 @@ export default {
       cli.$nextTick(function() {
         let cliOutput = document.getElementsByClassName('cli__output')[0];
         let cliCommandOutput = document.querySelectorAll('[data-is="command"]');
-        cliCommandOutput = cliCommandOutput[cliCommandOutput.length - 1];
-
-        cliOutput.scrollTop = cliCommandOutput.offsetTop;
+        if (cliCommandOutput.length > 0) {
+          cliCommandOutput = cliCommandOutput[cliCommandOutput.length - 1];
+          cliOutput.scrollTop = cliCommandOutput.offsetTop;
+        }
       })
 
       // reset the command after resolution
