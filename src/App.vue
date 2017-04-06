@@ -8,7 +8,7 @@
 
 <script>
 /* eslint-disable */
-import store from './router/store';
+import store from './data/store';
 
 export default {
   name: 'app',
