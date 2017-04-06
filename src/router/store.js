@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isTutorial: true,
+    isViewingSky: false,
     squirrelQuest: true,
     squirrelDebt: false,
     squirrelDebtCounter: 1,

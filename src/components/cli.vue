@@ -137,6 +137,52 @@ export default {
           }
         },
         {
+          name: 'viewSky',
+          verbs: ['douse', 'put out'],
+          nouns: ['fire'],
+          qualifier: {
+            state: {
+              isTutorial: false,
+              isViewingSky: false
+            }
+          },
+          success: [
+            {
+              outputter: 'event',
+              output: 'You {verb} the {noun}'
+            }
+          ],
+          resolution: function(cli) {
+            cli.$store.commit('booleanToggle', {
+              qualifier: 'isViewingSky',
+              boolean: true
+            })
+          }
+        },
+        {
+          name: 'viewCampground',
+          verbs: ['kindle', 'start', 'stoke'],
+          nouns: ['fire'],
+          qualifier: {
+            state: {
+              isTutorial: false,
+              isViewingSky: true
+            }
+          },
+          success: [
+            {
+              outputter: 'event',
+              output: 'You {verb} the {noun}'
+            }
+          ],
+          resolution: function(cli) {
+            cli.$store.commit('booleanToggle', {
+              qualifier: 'isViewingSky',
+              boolean: false
+            })
+          }
+        },
+        {
           name: 'squirrelQuest_1',
           verbs: ['feed'],
           nouns: ['squirrel'],

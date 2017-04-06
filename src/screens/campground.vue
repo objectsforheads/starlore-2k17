@@ -1,5 +1,8 @@
 <template>
-  <div class="campground">
+  <div class="campground" v-bind:class="isViewingSky">
+    <div class="background">
+      <div class="star-field sprite"></div>
+    </div>
     <div class="foreground" v-bind:class="isTutorial">
       <div class="mountains sprite"></div>
       <div class="land sprite">
@@ -25,6 +28,12 @@
           return false;
         }
         return 'lit';
+      },
+      isViewingSky: function() {
+        if (this.$store.state.isViewingSky) {
+          return 'viewing-sky';
+        }
+        return false;
       }
     }
   }
@@ -118,6 +127,16 @@
       animation: fadeIn 360ms;
       animation-fill-mode: both;
       animation-delay: 540ms;
+    }
+  }
+
+  .foreground .sprite {
+    transition: font-size 500ms ease-out;
+  }
+
+  .viewing-sky {
+    .sprite {
+      font-size: 1rem;
     }
   }
 </style>
