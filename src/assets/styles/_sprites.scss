@@ -14,11 +14,6 @@
   height: 17em;
   background: url('./assets/images/sprite_fire.png') -184em 0 no-repeat transparent;
   background-size: 322em 17em;
-  animation: fireStart steps(1) 1000ms infinite alternate;
-
-  &.lit {
-    animation: fireGoing steps(1) 450ms infinite alternate;
-  }
 }
 
 @keyframes fireStart {
@@ -45,4 +40,68 @@
   60% { background-position: -230em 0; }
   80% { background-position: -253em 0; }
   100% { background-position: -276em 0; }
+}
+
+.land {
+  width: 384em;
+  height: 168em;
+}
+
+[class*="land--"] {
+  position: absolute;
+  background: url('./assets/images/sprite_campground.png') no-repeat transparent;
+  background-size: 875em 535em;
+}
+
+.land--1 {
+  z-index: 5;
+  top: 102.5em;
+  left: 193.5em;
+  width: 63em;
+  height: 20.5em;
+  background-position: -577em -390em;
+}
+
+.land--2 {
+  z-index: 4;
+  top: 2em;
+  left: 166.5em;
+  width: 135.5em;
+  height: 124.5em;
+  background-position: -272em -390em;
+}
+
+.land--3 {
+  z-index: 3;
+  top: 5em;
+  left: 138em;
+  width: 169.5em;
+  height: 129em;
+  background-position: -407.5em -389em;
+}
+
+.land--4 {
+  z-index: 2;
+  top: 8em;
+  left: 78em;
+  width: 272em;
+  height: 145em;
+  background-position: 0 -390em;
+}
+
+.land--5 {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 384em;
+  height: 167em;
+  background-position: 0 -223em;
+}
+
+.mountains {
+  width: 517.5em;
+  height: 92.5em;
+
+  background: url('./assets/images/background_mountains.png') no-repeat transparent;
+  background-size: 517.5em 92.5em;
 }
