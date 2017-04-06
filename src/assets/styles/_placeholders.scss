@@ -1,0 +1,29 @@
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.starfield {
+  width: 900em;
+  height: 400em;
+  background: url('./assets/images/temp_starfield.jpg') no-repeat center center;
+  background-size: cover;
+  opacity: 0.1;
+
+  position: absolute;
+  top: -136em;
+  right: -78em;
+  transform: translateY(-5%) rotate(4deg);
+  opacity: 0;
+
+  transition: all 1500ms;
+}
+
+.viewing-sky .starfield {
+  opacity: 0.075;
+  transform: rotate(4deg);
+  font-size: 2rem !important;
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="campground" v-bind:class="isViewingSky">
     <div class="background">
-      <div class="star-field sprite"></div>
+      <div class="starfield sprite"></div>
     </div>
     <div class="foreground" v-bind:class="isTutorial">
       <div class="mountains sprite"></div>
