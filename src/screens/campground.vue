@@ -45,7 +45,7 @@
 
   .foreground {
     height: 100%;
-    max-height: calc(100% - 250rem); // CLI height
+    max-height: calc(100% - 175rem); // CLI height
   }
 
   .mountains {
@@ -56,7 +56,7 @@
     z-index: 0;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 35em;
+    bottom: 36em;
 
     opacity: 0;
   }
@@ -64,7 +64,7 @@
   .land {
     position: absolute;
     z-index: 1;
-    bottom: -45em;
+    bottom: -39em;
     left: 50%;
     transform: translateX(calc(-50% - 30em));
 
@@ -76,7 +76,7 @@
   .fire {
     position: absolute;
     z-index: 2;
-    bottom: 0;
+    bottom: 6em;
     left: 50%;
     transform: translateX(-50%);
 

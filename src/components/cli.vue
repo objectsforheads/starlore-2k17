@@ -427,23 +427,33 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  // HACK really need a better way to import variables
+  @import '../assets/styles/_globals';
+
   .game-cli {
+    z-index: 2;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
 
-    max-height: 250rem;
+    height: 175rem;
 
     display: flex;
     flex-direction: column;
 
+    background: rgba($g-palette_primary-dark, 0.5);
+    border: 3rem solid rgba($g-palette_primary-white, 0.75);
     padding: 0 9rem;
   }
 
   .cli__output {
     flex: 1;
     overflow: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   .cli__outputter {
