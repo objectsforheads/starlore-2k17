@@ -3,6 +3,7 @@
     <div class="background">
       <div class="starfield sprite"></div>
     </div>
+    <planisphere></planisphere>
     <div class="foreground" v-bind:class="isTutorial">
       <div class="mountains sprite"></div>
       <div class="land sprite">

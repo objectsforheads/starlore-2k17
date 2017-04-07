@@ -7,6 +7,10 @@ import campground from '@/screens/campground';
 
 import gameCLI from '@/components/cli';
 
+import planisphere from '@/components/planisphere';
+import constellation from '@/components/constellation';
+import constellationPath from '@/components/constellation-path';
+
 Vue.use(Router);
 Vue.use(Vuex);
 
@@ -18,3 +22,6 @@ export default new Router({
 });
 
 Vue.component('game-cli', gameCLI);
+Vue.component('planisphere', planisphere);
+Vue.component('constellation', constellation);
+Vue.component('constellation-path', constellationPath);
