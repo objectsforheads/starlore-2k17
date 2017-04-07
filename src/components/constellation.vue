@@ -1,6 +1,7 @@
 <template>
   <div class="constellation"
   v-bind:data-name="constellation.name"
+  v-on:click="animateConstellation"
   v-bind:style="{
     'left': constellation.left,
     'top': constellation.top,
@@ -28,6 +29,28 @@
 export default {
   name: 'constellation',
   props: ['constellation'],
+  methods: {
+    animateConstellation: function() {
+      let paths = this.$el.querySelectorAll('path');
+      for (var i = 0; i < paths.length; i++) {
+        let path = paths[i];
+        const timing = path.getAttribute('data-timing');
+        const length = path.getTotalLength();
+        // Clear any previous transition
+        path.style.transition = path.style.WebkitTransition = 'none';
+        // Set up the starting positions
+        path.style.strokeDasharray = length + ' ' + length;
+        path.style.strokeDashoffset = length;
+        // Trigger a layout so styles are calculated & the browser
+        // picks up the starting position before animating
+        path.getBoundingClientRect();
+
+        path.style.transition = path.style.WebkitTransition = timing;
+
+        // Go!
+        path.style.strokeDashoffset = '0';
+      }
+    }
   }
 };
 </script>
