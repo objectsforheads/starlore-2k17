@@ -29,20 +29,20 @@ export default [
     ],
     paint: [
       // start branching
-      { path: '1,2,3,4', timing: 'stroke-dashoffset 2000ms ease-in' },
-      { path: '1,5,6,7', timing: 'stroke-dashoffset 2000ms ease-in' },
-      { path: '1,8', timing: 'stroke-dashoffset 500ms ease-in' },
+      { path: [1, 2, 3, 4], timing: 'stroke-dashoffset 2000ms ease-in' },
+      { path: [1, 5, 6, 7], timing: 'stroke-dashoffset 2000ms ease-in' },
+      { path: [1, 8], timing: 'stroke-dashoffset 500ms ease-in' },
 
       // finish diversion from 8 when 8 is connected
-      { path: '8,9', timing: 'stroke-dashoffset 500ms linear 500ms' },
-      { path: '9,10', timing: 'stroke-dashoffset 250ms ease-out 1000ms' },
-      { path: '9,11', timing: 'stroke-dashoffset 250ms ease-out 1000ms' },
+      { path: [8, 9], timing: 'stroke-dashoffset 500ms linear 500ms' },
+      { path: [9, 10], timing: 'stroke-dashoffset 250ms ease-out 1000ms' },
+      { path: [9, 11], timing: 'stroke-dashoffset 250ms ease-out 1000ms' },
 
       // continue to to water
-      { path: '8,12,13', timing: 'stroke-dashoffset 1500ms linear 500ms' },
+      { path: [8, 12, 13], timing: 'stroke-dashoffset 1500ms linear 500ms' },
       // water branches
-      { path: '13,14,15,16,17', timing: 'stroke-dashoffset 2500ms ease-out 2000ms' },
-      { path: '13,20,19,18,17', timing: 'stroke-dashoffset 2500ms ease-out 2000ms' },
+      { path: [13, 14, 15, 16, 17], timing: 'stroke-dashoffset 2500ms ease-out 2000ms' },
+      { path: [13, 20, 19, 18, 17], timing: 'stroke-dashoffset 2500ms ease-out 2000ms' },
     ],
   },
 ];

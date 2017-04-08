@@ -14,7 +14,7 @@ export default {
     // Get the path we need to target
     let path = this.$el.firstChild;
     // Get the array of stars we need to connect as indexes
-    let draw = this.path.split(',');
+    let draw = this.path;
 
     // Accumulate path points
     let line = '';
