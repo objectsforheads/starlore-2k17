@@ -15,7 +15,7 @@ export default {
   props: ['star'],
   data() {
     return {
-      constellations() { return constellations; },
+      constellations,
     };
   },
 };
