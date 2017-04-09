@@ -28,7 +28,7 @@ export default {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 768rem;
-  height: 768rem;
+  width: 2250rem;
+  height: 1024rem;
 }
 </style>
