@@ -24,8 +24,8 @@ export default {
   name: 'gameCLI',
   created: function () {
     let cli = this;
-    window.addEventListener('keypress', (e) => {
-      cli.windowKeypress(e)
+    window.addEventListener('keyup', (e) => {
+      cli.windowKeyup(e)
     })
   },
   computed: {
@@ -98,7 +98,7 @@ export default {
     }
   },
   methods: {
-    windowKeypress: function(e) {
+    windowKeyup: function(e) {
       let cli = this;
       // If keypress is a character, let it through
       if (e.key.length === 1) {
