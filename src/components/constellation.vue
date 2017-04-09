@@ -2,16 +2,11 @@
   <div class="constellation"
   v-bind:data-name="constellation.name"
   v-on:click="animateConstellation"
-  v-bind:style="{
-    'left': constellation.left,
-    'top': constellation.top,
-    'width': constellation.width,
-    'height': constellation.height
-  }">
-    <template v-for="star in constellation.stars">
+  v-bind:style="starTransformer">
+    <template v-for="star in ownStars">
       <div class="star" v-bind:style="{
-        'left': star[0],
-        'top': star[1]
+        'top': star.top,
+        'left': star.left
       }"></div>
     </template>
     <constellation-path
@@ -25,10 +20,42 @@
 
 <script>
 /* eslint-disable */
+import stars from '../data/stars';
 
 export default {
   name: 'constellation',
   props: ['constellation'],
+  data() {
+    return {
+      stars,
+    };
+  },
+  computed: {
+    starTransformer: function() {
+      let ref = this.constellation;
+      return {
+        top: ref.top,
+        left: ref.left,
+        width: ref.width,
+        height: ref.height,
+        transform: `scale(${ref.scale}) rotate(${ref.rotation})`
+      }
+    },
+    ownStars: function() {
+      if (this.stars[this.constellation.name]) {
+        return this.stars[this.constellation.name].stars
+      }
+      console.log(this.constellation.name);
+      return false;
+    },
+    starPath: function() {
+      if (this.stars[this.constellation.name]) {
+        return this.stars[this.constellation.name].path
+      }
+      console.log(this.constellation.name);
+      return false;
+    }
+  },
   methods: {
     animateConstellation: function() {
       let paths = this.$el.querySelectorAll('path');
