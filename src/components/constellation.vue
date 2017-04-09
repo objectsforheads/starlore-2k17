@@ -10,7 +10,7 @@
       }"></div>
     </template>
     <constellation-path
-      v-for="path in constellation.paint"
+      template v-for="path in starPath"
       :key="constellation.name"
       :path="path.path"
       :timing="path.timing">
@@ -45,13 +45,15 @@ export default {
       if (this.stars[this.constellation.name]) {
         return this.stars[this.constellation.name].stars
       }
+      // Error testing
       console.log(this.constellation.name);
       return false;
     },
     starPath: function() {
       if (this.stars[this.constellation.name]) {
-        return this.stars[this.constellation.name].path
+        return this.stars[this.constellation.name].paint
       }
+      // Error testing
       console.log(this.constellation.name);
       return false;
     }
