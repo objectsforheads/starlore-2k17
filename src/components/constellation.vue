@@ -9,12 +9,14 @@
         'left': star.left
       }"></div>
     </template>
-    <constellation-path
-      template v-for="path in starPath"
-      :key="constellation.name"
-      :path="path.path"
-      :timing="path.timing">
-      </constellation-path>
+    <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" class="constellation-line">
+      <constellation-path
+        template v-for="path in starPath"
+        :key="constellation.name"
+        :path="path.path"
+        :timing="path.timing">
+        </constellation-path>
+    </svg>
   </div>
 </template>
 

@@ -1,8 +1,6 @@
 <template>
-  <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" class="constellation-line">
-    <path v-bind:data-timing="this.timing"
-    stroke="#ccc" stroke-width="1" fill="none"/>
-  </svg>
+  <path v-bind:data-timing="this.timing"
+  stroke="#ccc" stroke-width="1" fill="none"/>
 </template>
 
 <script>
@@ -12,7 +10,7 @@ export default {
   props: ['path', 'timing'],
   mounted: function() {
     // Get the path we need to target
-    let path = this.$el.firstChild;
+    let path = this.$el;
     // Get the array of stars we need to connect as indexes
     let draw = this.path;
 
