@@ -117,6 +117,12 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+  }
+}
+
+// Stars are only clickable when .viewing-sky
+.viewing-sky {
+  .star::after {
     pointer-events: initial;
   }
 }

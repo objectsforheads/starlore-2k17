@@ -1,10 +1,7 @@
 <template>
-  <div class="campground" v-bind:class="isViewingSky">
-    <div class="background">
-      <div class="starfield sprite"></div>
-    </div>
+  <div class="campground" v-bind:class="[isTutorial, isViewingSky]">
     <planisphere></planisphere>
-    <div class="foreground" v-bind:class="isTutorial">
+    <div class="foreground">
       <div class="mountains sprite"></div>
       <div class="land sprite">
         <div class="land--1"></div>
@@ -56,6 +53,10 @@
   .foreground {
     height: 100%;
     max-height: calc(100% - 175rem); // CLI height
+
+    .sprite {
+      transition: all 500ms ease-out;
+    }
   }
 
   .mountains {
@@ -131,12 +132,8 @@
     }
   }
 
-  .foreground .sprite {
-    transition: font-size 500ms ease-out;
-  }
-
   .viewing-sky {
-    .sprite {
+    .foreground .sprite {
       font-size: 1rem;
     }
   }

@@ -27,8 +27,6 @@ export default {
 @import './assets/styles/_animations';
 @import './assets/styles/_sprites';
 
-@import './assets/styles/_placeholders';
-
 *, *::before, *::after {
   position: relative;
   box-sizing: border-box;
