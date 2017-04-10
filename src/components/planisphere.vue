@@ -22,6 +22,7 @@
 <script>
 /* eslint-disable */
 import constellations from '../data/constellations';
+import _ from 'lodash';
 
 export default {
   name: 'planisphere',
@@ -112,25 +113,26 @@ export default {
         })
       }
     },
-    starfieldMousemove: function(e) {
-      let self = this;
-      let canMove = self.$store.state.canNavigateSky;
-      let isMoving = self.$store.state.isNavigatingSky;
-      if (canMove && !isMoving) {
-        self.$store.commit('booleanToggle', {
-          qualifier: 'isNavigatingSky',
-          boolean: true
-        })
-      }
-      if (isMoving) {
-        let start = this.starfieldGPS.start;
+    starfieldMousemove: _.throttle(
+      function(e) {
+        let self = this;
+        let canMove = self.$store.state.canNavigateSky;
+        let isMoving = self.$store.state.isNavigatingSky;
+        if (canMove && !isMoving) {
+          self.$store.commit('booleanToggle', {
+            qualifier: 'isNavigatingSky',
+            boolean: true
+          })
+        }
+        if (isMoving) {
+          let start = this.starfieldGPS.start;
 
-        this.starfieldGPS.diff.x = start.x - e.screenX;
-        this.starfieldGPS.diff.y = start.y - e.screenY;
-        start.x = e.screenX;
-        start.y = e.screenY;
-      }
-    },
+          this.starfieldGPS.diff.x = start.x - e.screenX;
+          this.starfieldGPS.diff.y = start.y - e.screenY;
+          start.x = e.screenX;
+          start.y = e.screenY;
+        }
+      }, 50),
     starfieldMouseup: function(e) {
       let self = this;
       self.$store.commit('booleanToggle', {

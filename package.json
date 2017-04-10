@@ -12,6 +12,7 @@
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "css-loader": "^0.26.4",
+    "lodash": "^4.17.4",
     "normalize.css": "^6.0.0",
     "reset-css": "^2.2.0",
     "sass-loader": "^6.0.3",
