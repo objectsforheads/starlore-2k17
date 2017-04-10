@@ -1,5 +1,9 @@
 <template>
-  <div class="starfield">
+  <div class="starfield"
+    v-bind:style="starfieldNaviator"
+    v-on:mousedown="starfieldMousedown"
+    v-on:mousemove="starfieldMousemove"
+    v-on:mouseup="starfieldMouseup">
     <div class="planisphere">
       <constellation v-for="constellation in constellations"
       v-bind:key="constellation.name"
@@ -16,16 +20,109 @@
 </template>
 
 <script>
+/* eslint-disable */
 import constellations from '../data/constellations';
 
 export default {
   name: 'planisphere',
   props: ['star'],
+  mounted: function() {
+    let currentWidth = this.$el.clientWidth;
+    let windowWidth = window.innerWidth;
+    this.starfieldCoordinates.x = windowWidth/2 - currentWidth/2;
+  },
+  computed: {
+    starfieldNaviator: function() {
+      let coords = this.starfieldCoordinates;
+      coords.x = coords.x - this.starfieldGPS.diff.x;
+      coords.y = coords.y - this.starfieldGPS.diff.y;
+
+      try {
+        // Snap planisphere back to left when at right edge
+        if (coords.x < (window.innerWidth - this.$el.clientWidth)) {
+          coords.x = (window.innerWidth - this.$el.clientWidth/2);
+        }
+
+        // Snap planisphere to right when at left edge
+        if (coords.x >= 0) {
+          coords.x = -this.$el.clientWidth/2;
+        }
+      } catch(err) {}
+
+      return {
+        transform: `translate(${coords.x}rem, ${coords.y}rem)`
+      }
+    }
+  },
   data() {
     return {
       constellations,
+      starfieldCoordinates: {
+        x: 0,
+        y: 0
+      },
+      starfieldGPS: {
+        start: {
+          x: 0,
+          y: 0
+        },
+        diff: {
+          x: 0,
+          y: 0
+        }
+      }
     };
   },
+  methods: {
+    starfieldMousedown: function(e) {
+      let self = this;
+      let canMove = this.$store.state.isViewingSky;
+      if (canMove) {
+        self.starfieldGPS.start.x = e.screenX;
+        self.starfieldGPS.start.y = e.screenY;
+        self.$store.commit('booleanToggle', {
+          qualifier: 'canNavigateSky',
+          boolean: true
+        })
+      }
+    },
+    starfieldMousemove: function(e) {
+      let self = this;
+      let canMove = self.$store.state.canNavigateSky;
+      let isMoving = self.$store.state.isNavigatingSky;
+      if (canMove && !isMoving) {
+        self.$store.commit('booleanToggle', {
+          qualifier: 'isNavigatingSky',
+          boolean: true
+        })
+      }
+      if (isMoving) {
+        let start = this.starfieldGPS.start;
+
+        this.starfieldGPS.diff.x = start.x - e.screenX;
+        this.starfieldGPS.diff.y = start.y - e.screenY;
+        start.x = e.screenX;
+        start.y = e.screenY;
+      }
+    },
+    starfieldMouseup: function(e) {
+      let self = this;
+      self.$store.commit('booleanToggle', {
+        qualifier: 'canNavigateSky',
+        boolean: false
+      })
+      self.$store.commit('booleanToggle', {
+        qualifier: 'isNavigatingSky',
+        boolean: false
+      })
+
+      let isMoving = this.$store.state.isNavigatingSky;
+      if (isMoving) {
+        this.starfieldGPS.diff.x = 0;
+        this.starfieldGPS.diff.y = 0;
+      }
+    }
+  }
 };
 </script>
 

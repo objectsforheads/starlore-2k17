@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     isTutorial: true,
     isViewingSky: false,
+    canNavigateSky: false,
+    isNavigatingSky: false,
     squirrelQuest: true,
     squirrelDebt: false,
     squirrelDebtCounter: 1,
