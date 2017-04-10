@@ -27,6 +27,24 @@ import _ from 'lodash';
 export default {
   name: 'planisphere',
   props: ['star'],
+  created: function() {
+    document.addEventListener('mouseout', (e) => {
+      e = e ? e : window.event;
+      let from = e.relatedTarget || e.toElement;
+      if (!from || from.nodeName == "HTML") {
+        let self = this;
+        self.$store.commit('booleanToggle', {
+          qualifier: 'canNavigateSky',
+          boolean: false
+        })
+        self.$store.commit('booleanToggle', {
+          qualifier: 'isNavigatingSky',
+          boolean: false
+        })
+      }
+
+    })
+  },
   mounted: function() {
     let currentWidth = this.$el.clientWidth;
     let currentHeight = this.$el.clientHeight;
@@ -102,6 +120,7 @@ export default {
   },
   methods: {
     starfieldMousedown: function(e) {
+      e.preventDefault();
       let self = this;
       let canMove = this.$store.state.isViewingSky;
       if (canMove) {
@@ -115,6 +134,7 @@ export default {
     },
     starfieldMousemove: _.throttle(
       function(e) {
+        e.preventDefault();
         let self = this;
         let canMove = self.$store.state.canNavigateSky;
         let isMoving = self.$store.state.isNavigatingSky;
