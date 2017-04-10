@@ -28,24 +28,40 @@ export default {
   props: ['star'],
   mounted: function() {
     let currentWidth = this.$el.clientWidth;
+    let currentHeight = this.$el.clientHeight;
     let windowWidth = window.innerWidth;
+    let windowHeight = window.innerHeight;
+    let nonStarfieldRegionHeight = document.querySelector('.game-cli').clientHeight;
+
     this.starfieldCoordinates.x = windowWidth/2 - currentWidth/2;
+
+    this.starfieldGPS.constraint.x.right = windowWidth - currentWidth;
+    this.starfieldGPS.constraint.y.bottom = windowHeight - currentHeight - nonStarfieldRegionHeight;
   },
   computed: {
     starfieldNaviator: function() {
       let coords = this.starfieldCoordinates;
+      let gps = this.starfieldGPS.constraint;
       coords.x = coords.x - this.starfieldGPS.diff.x;
       coords.y = coords.y - this.starfieldGPS.diff.y;
 
       try {
         // Snap planisphere back to left when at right edge
-        if (coords.x < (window.innerWidth - this.$el.clientWidth)) {
+        if (coords.x < gps.x.right) {
           coords.x = (window.innerWidth - this.$el.clientWidth/2);
         }
 
         // Snap planisphere to right when at left edge
-        if (coords.x >= 0) {
+        if (coords.x > gps.x.left) {
           coords.x = -this.$el.clientWidth/2;
+        }
+
+        if (coords.y > gps.y.top) {
+          coords.y = gps.y.top;
+        }
+
+        if (coords.y < gps.y.bottom) {
+          coords.y = gps.y.bottom;
         }
       } catch(err) {}
 
@@ -69,6 +85,16 @@ export default {
         diff: {
           x: 0,
           y: 0
+        },
+        constraint: {
+          x: {
+            left: 0,
+            right: 0
+          },
+          y: {
+            top: 0,
+            bottom: 0
+          }
         }
       }
     };
