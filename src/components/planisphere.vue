@@ -4,24 +4,7 @@
     v-on:mousedown="starfieldMousedown"
     v-on:mousemove="starfieldMousemove"
     v-on:mouseup="starfieldMouseup">
-    <div class="planisphere">
-      <constellation v-for="constellation in constellations"
-      v-bind:key="constellation.name"
-      v-bind:constellation="constellation">
-      </constellation>
-    </div>
-    <div class="planisphere">
-      <constellation v-for="constellation in constellations"
-      v-bind:key="constellation.name"
-      v-bind:constellation="constellation">
-      </constellation>
-    </div>
-    <div class="planisphere">
-      <constellation v-for="constellation in constellations"
-      v-bind:key="constellation.name"
-      v-bind:constellation="constellation">
-      </constellation>
-    </div>
+    <canvas id="planisphere" width="4500" height="2048"></canvas>
     <div class="planisphere">
       <constellation v-for="constellation in constellations"
       v-bind:key="constellation.name"
@@ -34,6 +17,7 @@
 <script>
 /* eslint-disable */
 import constellations from '../data/constellations';
+import stars from '../data/stars';
 import _ from 'lodash';
 
 export default {
@@ -62,13 +46,63 @@ export default {
     let currentHeight = this.$el.clientHeight;
     let windowWidth = window.innerWidth;
     let windowHeight = window.innerHeight;
-    let nonStarfieldRegionHeight = document.querySelector('.game-cli').clientHeight;
 
     this.starfieldCoordinates.x = windowWidth/2 - currentWidth/2;
     this.starfieldCoordinates.y = windowHeight/2 - currentHeight/2;
 
     this.starfieldGPS.constraint.x.right = windowWidth - currentWidth;
     this.starfieldGPS.constraint.y.bottom = windowHeight - currentHeight;
+
+    // Draw the starfield in the canvas
+    let planisphere = document.getElementById('planisphere').getContext('2d');
+    let planisphereWidth = currentWidth / 2;
+    let planisphereHeight = currentHeight / 2;
+    let constellations = this.constellations;
+
+    // Each constellation should be drawn in each quadrant
+    [
+      [0, 0],
+      [planisphereWidth, 0],
+      [0, planisphereHeight],
+      [planisphereWidth, planisphereHeight]
+    ].forEach(function(quadrant) {
+      constellations.forEach(function(constellation) {
+        planisphere.save();
+        // set canvas origin
+        let moveX = (parseFloat(constellation.left)/100 * planisphereWidth) + quadrant[0];
+        let moveY = (parseFloat(constellation.top)/100 * planisphereHeight) + quadrant[1];
+        let constellationWidth = parseFloat(constellation.width)/100 * constellation.scale * planisphereWidth;
+        let constellationHeight = parseFloat(constellation.height)/100 * constellation.scale * planisphereHeight;
+        // Rotate around center
+        planisphere.translate(
+          moveX + (constellationWidth/2),
+          moveY + (constellationHeight/2)
+        );
+        planisphere.rotate((Math.PI/180) * constellation.rotation);
+        planisphere.translate(
+          -(constellationWidth/2),
+          -(constellationHeight/2)
+        );
+
+        let ownStars = stars[constellation.name].stars;
+        let starRadius = 1;
+        try {
+          ownStars.forEach(function(star) {
+            planisphere.beginPath();
+            let starX = constellationWidth * parseFloat(star.left) / 100;
+            let starY = constellationHeight * parseFloat(star.top) / 100;
+            planisphere.arc(starX, starY, starRadius, 0, Math.PI * 2, false);
+            planisphere.fillStyle = 'rgba(255,255,255,0.25)';
+            planisphere.fill();
+            // planisphere.fillRect(0, 0, constellationWidth, constellationHeight);
+          })
+        }
+        catch(err) {
+          console.log(constellation.name)
+        }
+        planisphere.restore();
+      })
+    })
   },
   computed: {
     starfieldNaviator: function() {
@@ -197,6 +231,7 @@ export default {
   will-change: content;
 
   width: 4500rem;
+  height: 2048rem;
   flex-wrap: wrap;
 
   // Set up the night sky backdrop
@@ -221,6 +256,12 @@ export default {
       opacity: 0.2;
     }
   }
+}
+
+[id="planisphere"] {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .planisphere {

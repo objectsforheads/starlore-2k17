@@ -7,7 +7,7 @@ export default [
     "width": "10.01%",
     "height": "33.07%",
     "scale": "0.70",
-    "rotation": "74.25deg"
+    "rotation": "74.25"
   },
   {
     "name": "Scorpius",
@@ -16,7 +16,7 @@ export default [
     "width": "10.01%",
     "height": "33.85%",
     "scale": "0.70",
-    "rotation": "26.25deg"
+    "rotation": "26.25"
   },
   {
     "name": "Ursa Minor",
@@ -25,7 +25,7 @@ export default [
     "width": "10.01%",
     "height": "19.40%",
     "scale": "0.70",
-    "rotation": "-13.50deg"
+    "rotation": "-13.50"
   },
   {
     "name": "Scutum",
@@ -34,7 +34,7 @@ export default [
     "width": "10.01%",
     "height": "36.98%",
     "scale": "0.25",
-    "rotation": "-25.50deg"
+    "rotation": "-25.50"
   },
   {
     "name": "Sculptor",
@@ -43,7 +43,7 @@ export default [
     "width": "10.01%",
     "height": "53.65%",
     "scale": "0.25",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Microscopium",
@@ -52,7 +52,7 @@ export default [
     "width": "10.01%",
     "height": "65.10%",
     "scale": "0.10",
-    "rotation": "10.50deg"
+    "rotation": "10.50"
   },
   {
     "name": "Ursa Major",
@@ -61,7 +61,7 @@ export default [
     "width": "10.01%",
     "height": "18.10%",
     "scale": "1.30",
-    "rotation": "-12.00deg"
+    "rotation": "-12.00"
   },
   {
     "name": "Apus",
@@ -70,7 +70,7 @@ export default [
     "width": "10.01%",
     "height": "65.10%",
     "scale": "0.25",
-    "rotation": "-78.75deg"
+    "rotation": "-78.75"
   },
   {
     "name": "Triangulum",
@@ -79,7 +79,7 @@ export default [
     "width": "10.01%",
     "height": "17.19%",
     "scale": "0.25",
-    "rotation": "16.50deg"
+    "rotation": "16.50"
   },
   {
     "name": "Orion",
@@ -88,7 +88,7 @@ export default [
     "width": "10.01%",
     "height": "33.20%",
     "scale": "0.70",
-    "rotation": "-5.25deg"
+    "rotation": "-5.25"
   },
   {
     "name": "Perseus",
@@ -97,7 +97,7 @@ export default [
     "width": "10.01%",
     "height": "30.86%",
     "scale": "0.55",
-    "rotation": "-153.75deg"
+    "rotation": "-153.75"
   },
   {
     "name": "Taurus",
@@ -106,7 +106,7 @@ export default [
     "width": "10.01%",
     "height": "18.10%",
     "scale": "0.85",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Sagittarius",
@@ -115,7 +115,7 @@ export default [
     "width": "10.01%",
     "height": "20.31%",
     "scale": "0.85",
-    "rotation": "3.75deg"
+    "rotation": "3.75"
   },
   {
     "name": "Saggita",
@@ -124,7 +124,7 @@ export default [
     "width": "10.01%",
     "height": "10.03%",
     "scale": "0.25",
-    "rotation": "0.75deg"
+    "rotation": "0.75"
   },
   {
     "name": "Pisces Australis",
@@ -133,7 +133,7 @@ export default [
     "width": "10.01%",
     "height": "12.11%",
     "scale": "0.55",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Equuleus",
@@ -142,7 +142,7 @@ export default [
     "width": "10.01%",
     "height": "33.07%",
     "scale": "0.25",
-    "rotation": "18.00deg"
+    "rotation": "18.00"
   },
   {
     "name": "Pisces",
@@ -151,7 +151,7 @@ export default [
     "width": "10.01%",
     "height": "16.28%",
     "scale": "1.15",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Pegasus",
@@ -160,7 +160,7 @@ export default [
     "width": "10.01%",
     "height": "18.75%",
     "scale": "0.85",
-    "rotation": "-178.50deg"
+    "rotation": "-178.50"
   },
   {
     "name": "Cancer",
@@ -169,7 +169,7 @@ export default [
     "width": "10.01%",
     "height": "32.29%",
     "scale": "0.40",
-    "rotation": "-5.25deg"
+    "rotation": "-5.25"
   },
   {
     "name": "Ophiuchus & Serpens",
@@ -178,7 +178,7 @@ export default [
     "width": "10.01%",
     "height": "22.40%",
     "scale": "1.30",
-    "rotation": "-5.25deg"
+    "rotation": "-5.25"
   },
   {
     "name": "Draco",
@@ -187,7 +187,7 @@ export default [
     "width": "10.01%",
     "height": "26.56%",
     "scale": "1.30",
-    "rotation": "-114.75deg"
+    "rotation": "-114.75"
   },
   {
     "name": "Cygnus",
@@ -196,7 +196,7 @@ export default [
     "width": "10.01%",
     "height": "27.47%",
     "scale": "0.70",
-    "rotation": "22.50deg"
+    "rotation": "22.50"
   },
   {
     "name": "Cepheus",
@@ -205,7 +205,7 @@ export default [
     "width": "10.01%",
     "height": "29.82%",
     "scale": "0.70",
-    "rotation": "129.00deg"
+    "rotation": "129.00"
   },
   {
     "name": "Canis Major",
@@ -214,7 +214,7 @@ export default [
     "width": "10.01%",
     "height": "28.91%",
     "scale": "0.40",
-    "rotation": "56.25deg"
+    "rotation": "56.25"
   },
   {
     "name": "Cassiopeia",
@@ -223,7 +223,7 @@ export default [
     "width": "10.01%",
     "height": "25.91%",
     "scale": "0.70",
-    "rotation": "91.50deg"
+    "rotation": "91.50"
   },
   {
     "name": "Lyra",
@@ -232,7 +232,7 @@ export default [
     "width": "10.01%",
     "height": "22.01%",
     "scale": "0.40",
-    "rotation": "30.00deg"
+    "rotation": "30.00"
   },
   {
     "name": "Bootes",
@@ -241,7 +241,7 @@ export default [
     "width": "10.01%",
     "height": "27.86%",
     "scale": "0.70",
-    "rotation": "-25.50deg"
+    "rotation": "-25.50"
   },
   {
     "name": "Auriga",
@@ -250,7 +250,7 @@ export default [
     "width": "10.01%",
     "height": "30.47%",
     "scale": "0.55",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Argo Navis",
@@ -259,7 +259,7 @@ export default [
     "width": "10.01%",
     "height": "26.17%",
     "scale": "1.00",
-    "rotation": "-71.25deg"
+    "rotation": "-71.25"
   },
   {
     "name": "Volans",
@@ -268,7 +268,7 @@ export default [
     "width": "10.01%",
     "height": "30.34%",
     "scale": "0.25",
-    "rotation": "-24.75deg"
+    "rotation": "-24.75"
   },
   {
     "name": "Telescopium",
@@ -277,7 +277,7 @@ export default [
     "width": "10.01%",
     "height": "27.21%",
     "scale": "0.25",
-    "rotation": "8.25deg"
+    "rotation": "8.25"
   },
   {
     "name": "Puppis",
@@ -286,7 +286,7 @@ export default [
     "width": "10.01%",
     "height": "31.90%",
     "scale": "0.55",
-    "rotation": "-7.50deg"
+    "rotation": "-7.50"
   },
   {
     "name": "Aquarius",
@@ -295,7 +295,7 @@ export default [
     "width": "10.01%",
     "height": "23.18%",
     "scale": "0.85",
-    "rotation": "181.50deg"
+    "rotation": "181.50"
   },
   {
     "name": "Pictor",
@@ -304,7 +304,7 @@ export default [
     "width": "10.01%",
     "height": "40.36%",
     "scale": "0.25",
-    "rotation": "27.00deg"
+    "rotation": "27.00"
   },
   {
     "name": "Aquila",
@@ -313,7 +313,7 @@ export default [
     "width": "10.01%",
     "height": "22.27%",
     "scale": "0.55",
-    "rotation": "-83.25deg"
+    "rotation": "-83.25"
   },
   {
     "name": "Lupus",
@@ -322,7 +322,7 @@ export default [
     "width": "10.01%",
     "height": "22.01%",
     "scale": "0.55",
-    "rotation": "501.00deg"
+    "rotation": "501.00"
   },
   {
     "name": "Musca",
@@ -331,7 +331,7 @@ export default [
     "width": "10.01%",
     "height": "27.47%",
     "scale": "0.25",
-    "rotation": "-147.75deg"
+    "rotation": "-147.75"
   },
   {
     "name": "Libra",
@@ -340,7 +340,7 @@ export default [
     "width": "10.01%",
     "height": "16.93%",
     "scale": "0.55",
-    "rotation": "17.25deg"
+    "rotation": "17.25"
   },
   {
     "name": "Hydrus",
@@ -349,7 +349,7 @@ export default [
     "width": "10.01%",
     "height": "34.38%",
     "scale": "0.40",
-    "rotation": "146.25deg"
+    "rotation": "146.25"
   },
   {
     "name": "Hercules",
@@ -358,7 +358,7 @@ export default [
     "width": "10.01%",
     "height": "22.01%",
     "scale": "1.00",
-    "rotation": "-11.25deg"
+    "rotation": "-11.25"
   },
   {
     "name": "Hydra",
@@ -367,7 +367,7 @@ export default [
     "width": "10.01%",
     "height": "21.09%",
     "scale": "2.05",
-    "rotation": "24.00deg"
+    "rotation": "24.00"
   },
   {
     "name": "Lepus",
@@ -376,7 +376,7 @@ export default [
     "width": "10.01%",
     "height": "18.88%",
     "scale": "0.40",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Leo",
@@ -385,7 +385,7 @@ export default [
     "width": "10.01%",
     "height": "18.23%",
     "scale": "0.85",
-    "rotation": "21.75deg"
+    "rotation": "21.75"
   },
   {
     "name": "Gemini",
@@ -394,7 +394,7 @@ export default [
     "width": "10.01%",
     "height": "22.01%",
     "scale": "0.85",
-    "rotation": "-18.00deg"
+    "rotation": "-18.00"
   },
   {
     "name": "Eridanus",
@@ -403,7 +403,7 @@ export default [
     "width": "10.01%",
     "height": "17.06%",
     "scale": "1.75",
-    "rotation": "21.75deg"
+    "rotation": "21.75"
   },
   {
     "name": "Chamaeleon",
@@ -412,7 +412,7 @@ export default [
     "width": "10.01%",
     "height": "35.94%",
     "scale": "0.40",
-    "rotation": "66.00deg"
+    "rotation": "66.00"
   },
   {
     "name": "Delphinus",
@@ -421,7 +421,7 @@ export default [
     "width": "10.01%",
     "height": "22.01%",
     "scale": "0.25",
-    "rotation": "-2.25deg"
+    "rotation": "-2.25"
   },
   {
     "name": "Crater",
@@ -430,7 +430,7 @@ export default [
     "width": "10.01%",
     "height": "21.35%",
     "scale": "0.40",
-    "rotation": "-14.25deg"
+    "rotation": "-14.25"
   },
   {
     "name": "Centaurus",
@@ -439,7 +439,7 @@ export default [
     "width": "10.01%",
     "height": "21.22%",
     "scale": "0.85",
-    "rotation": "-34.50deg"
+    "rotation": "-34.50"
   },
   {
     "name": "Corona Borealis",
@@ -448,7 +448,7 @@ export default [
     "width": "10.01%",
     "height": "19.27%",
     "scale": "0.25",
-    "rotation": "-22.50deg"
+    "rotation": "-22.50"
   },
   {
     "name": "Corvus",
@@ -457,7 +457,7 @@ export default [
     "width": "10.01%",
     "height": "17.06%",
     "scale": "0.40",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Corona Australis",
@@ -466,7 +466,7 @@ export default [
     "width": "10.01%",
     "height": "18.88%",
     "scale": "0.25",
-    "rotation": "-100.50deg"
+    "rotation": "-100.50"
   },
   {
     "name": "Cetus",
@@ -475,7 +475,7 @@ export default [
     "width": "10.01%",
     "height": "16.28%",
     "scale": "0.85",
-    "rotation": "29.25deg"
+    "rotation": "29.25"
   },
   {
     "name": "Ara",
@@ -484,7 +484,7 @@ export default [
     "width": "10.01%",
     "height": "20.83%",
     "scale": "0.55",
-    "rotation": "33.00deg"
+    "rotation": "33.00"
   },
   {
     "name": "Canis Minor",
@@ -493,7 +493,7 @@ export default [
     "width": "10.01%",
     "height": "18.62%",
     "scale": "0.25",
-    "rotation": "-37.50deg"
+    "rotation": "-37.50"
   },
   {
     "name": "Aries",
@@ -502,7 +502,7 @@ export default [
     "width": "10.01%",
     "height": "19.14%",
     "scale": "0.55",
-    "rotation": "66.75deg"
+    "rotation": "66.75"
   },
   {
     "name": "Lacerta",
@@ -511,7 +511,7 @@ export default [
     "width": "10.01%",
     "height": "27.21%",
     "scale": "0.40",
-    "rotation": "13.50deg"
+    "rotation": "13.50"
   },
   {
     "name": "Andromeda",
@@ -520,7 +520,7 @@ export default [
     "width": "10.01%",
     "height": "19.40%",
     "scale": "1.15",
-    "rotation": "108.00deg"
+    "rotation": "108.00"
   },
   {
     "name": "Vulpecula",
@@ -529,7 +529,7 @@ export default [
     "width": "10.01%",
     "height": "9.64%",
     "scale": "0.55",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Vela",
@@ -538,7 +538,7 @@ export default [
     "width": "10.01%",
     "height": "13.02%",
     "scale": "1.00",
-    "rotation": "1.50deg"
+    "rotation": "1.50"
   },
   {
     "name": "Tucana",
@@ -547,7 +547,7 @@ export default [
     "width": "10.01%",
     "height": "17.58%",
     "scale": "0.40",
-    "rotation": "-25.50deg"
+    "rotation": "-25.50"
   },
   {
     "name": "Sextans",
@@ -556,7 +556,7 @@ export default [
     "width": "10.01%",
     "height": "20.83%",
     "scale": "0.25",
-    "rotation": "-72.75deg"
+    "rotation": "-72.75"
   },
   {
     "name": "Reticulum",
@@ -565,7 +565,7 @@ export default [
     "width": "10.01%",
     "height": "22.01%",
     "scale": "0.25",
-    "rotation": "155.25deg"
+    "rotation": "155.25"
   },
   {
     "name": "Pyxis",
@@ -574,7 +574,7 @@ export default [
     "width": "10.01%",
     "height": "21.74%",
     "scale": "0.25",
-    "rotation": "-5.25deg"
+    "rotation": "-5.25"
   },
   {
     "name": "Phoenix",
@@ -583,7 +583,7 @@ export default [
     "width": "10.01%",
     "height": "15.10%",
     "scale": "0.70",
-    "rotation": "-114.75deg"
+    "rotation": "-114.75"
   },
   {
     "name": "Octans",
@@ -592,7 +592,7 @@ export default [
     "width": "10.01%",
     "height": "21.35%",
     "scale": "0.40",
-    "rotation": "-14.25deg"
+    "rotation": "-14.25"
   },
   {
     "name": "Pavo",
@@ -601,7 +601,7 @@ export default [
     "width": "10.01%",
     "height": "17.32%",
     "scale": "0.55",
-    "rotation": "204.00deg"
+    "rotation": "204.00"
   },
   {
     "name": "Norma",
@@ -610,7 +610,7 @@ export default [
     "width": "10.01%",
     "height": "16.67%",
     "scale": "0.25",
-    "rotation": "195.75deg"
+    "rotation": "195.75"
   },
   {
     "name": "Mensa",
@@ -619,7 +619,7 @@ export default [
     "width": "10.01%",
     "height": "17.58%",
     "scale": "0.55",
-    "rotation": "7.50deg"
+    "rotation": "7.50"
   },
   {
     "name": "Lynx",
@@ -628,7 +628,7 @@ export default [
     "width": "10.01%",
     "height": "16.67%",
     "scale": "1.00",
-    "rotation": "-12.75deg"
+    "rotation": "-12.75"
   },
   {
     "name": "Monoceros",
@@ -637,7 +637,7 @@ export default [
     "width": "10.01%",
     "height": "13.15%",
     "scale": "0.70",
-    "rotation": "-8.25deg"
+    "rotation": "-8.25"
   },
   {
     "name": "Indus",
@@ -646,7 +646,7 @@ export default [
     "width": "10.01%",
     "height": "22.79%",
     "scale": "0.40",
-    "rotation": "29.25deg"
+    "rotation": "29.25"
   },
   {
     "name": "Horologium",
@@ -655,7 +655,7 @@ export default [
     "width": "10.01%",
     "height": "29.30%",
     "scale": "0.55",
-    "rotation": "-40.50deg"
+    "rotation": "-40.50"
   },
   {
     "name": "Grus",
@@ -664,7 +664,7 @@ export default [
     "width": "10.01%",
     "height": "32.81%",
     "scale": "0.40",
-    "rotation": "-81.00deg"
+    "rotation": "-81.00"
   },
   {
     "name": "Fornax",
@@ -673,7 +673,7 @@ export default [
     "width": "10.01%",
     "height": "14.97%",
     "scale": "0.40",
-    "rotation": "-12.75deg"
+    "rotation": "-12.75"
   },
   {
     "name": "Dorado",
@@ -682,7 +682,7 @@ export default [
     "width": "10.01%",
     "height": "23.18%",
     "scale": "0.25",
-    "rotation": "-63.00deg"
+    "rotation": "-63.00"
   },
   {
     "name": "Crux",
@@ -691,7 +691,7 @@ export default [
     "width": "10.01%",
     "height": "24.87%",
     "scale": "0.25",
-    "rotation": "66.75deg"
+    "rotation": "66.75"
   },
   {
     "name": "Circinus",
@@ -700,7 +700,7 @@ export default [
     "width": "10.01%",
     "height": "22.53%",
     "scale": "0.40",
-    "rotation": "0.00deg"
+    "rotation": "0.00"
   },
   {
     "name": "Columba",
@@ -709,7 +709,7 @@ export default [
     "width": "10.01%",
     "height": "17.45%",
     "scale": "0.55",
-    "rotation": "189.75deg"
+    "rotation": "189.75"
   },
   {
     "name": "Coma Berenices",
@@ -718,7 +718,7 @@ export default [
     "width": "10.01%",
     "height": "14.19%",
     "scale": "0.40",
-    "rotation": "-72.00deg"
+    "rotation": "-72.00"
   },
   {
     "name": "Carina",
@@ -727,7 +727,7 @@ export default [
     "width": "10.01%",
     "height": "12.50%",
     "scale": "0.70",
-    "rotation": "22.50deg"
+    "rotation": "22.50"
   },
   {
     "name": "Canes Venatici",
@@ -736,7 +736,7 @@ export default [
     "width": "10.01%",
     "height": "26.04%",
     "scale": "0.40",
-    "rotation": "-21.00deg"
+    "rotation": "-21.00"
   },
   {
     "name": "Camelopardalis",
@@ -745,7 +745,7 @@ export default [
     "width": "10.01%",
     "height": "34.11%",
     "scale": "0.55",
-    "rotation": "-109.50deg"
+    "rotation": "-109.50"
   },
   {
     "name": "Caelum",
@@ -754,7 +754,7 @@ export default [
     "width": "10.01%",
     "height": "33.46%",
     "scale": "0.25",
-    "rotation": "14.25deg"
+    "rotation": "14.25"
   },
   {
     "name": "Antlia",
@@ -763,6 +763,6 @@ export default [
     "width": "10.01%",
     "height": "16.54%",
     "scale": "0.70",
-    "rotation": "180.00deg"
+    "rotation": "180.00"
   }
 ]

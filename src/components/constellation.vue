@@ -38,9 +38,9 @@ export default {
       return {
         top: ref.top,
         left: ref.left,
-        width: ref.width,
-        height: ref.height,
-        transform: `scale(${ref.scale}) rotate(${ref.rotation})`
+        width: `${parseFloat(ref.width) * ref.scale}%`,
+        height: `${parseFloat(ref.height) * ref.scale}%`,
+        transform: `rotate(${ref.rotation}deg)`
       }
     },
     ownStars: function() {
