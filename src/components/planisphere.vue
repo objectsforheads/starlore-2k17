@@ -16,6 +16,18 @@
       v-bind:constellation="constellation">
       </constellation>
     </div>
+    <div class="planisphere">
+      <constellation v-for="constellation in constellations"
+      v-bind:key="constellation.name"
+      v-bind:constellation="constellation">
+      </constellation>
+    </div>
+    <div class="planisphere">
+      <constellation v-for="constellation in constellations"
+      v-bind:key="constellation.name"
+      v-bind:constellation="constellation">
+      </constellation>
+    </div>
   </div>
 </template>
 
@@ -53,9 +65,10 @@ export default {
     let nonStarfieldRegionHeight = document.querySelector('.game-cli').clientHeight;
 
     this.starfieldCoordinates.x = windowWidth/2 - currentWidth/2;
+    this.starfieldCoordinates.y = windowHeight/2 - currentHeight/2;
 
     this.starfieldGPS.constraint.x.right = windowWidth - currentWidth;
-    this.starfieldGPS.constraint.y.bottom = windowHeight - currentHeight - nonStarfieldRegionHeight;
+    this.starfieldGPS.constraint.y.bottom = windowHeight - currentHeight;
   },
   computed: {
     starfieldNaviator: function() {
@@ -76,11 +89,11 @@ export default {
         }
 
         if (coords.y > gps.y.top) {
-          coords.y = gps.y.top;
+          coords.y = -this.$el.clientHeight/2;
         }
 
         if (coords.y < gps.y.bottom) {
-          coords.y = gps.y.bottom;
+          coords.y = (window.innerHeight - this.$el.clientHeight/2);
         }
       } catch(err) {}
 
@@ -183,6 +196,9 @@ export default {
   display: flex;
   will-change: content;
 
+  width: 4500rem;
+  flex-wrap: wrap;
+
   // Set up the night sky backdrop
   &::before {
     content: '';
@@ -192,7 +208,7 @@ export default {
     width: 100%;
     height: 100%;
     background: url('../assets/images/tmp.jpg');
-    background-size: 2250rem;
+    background-size: 2250rem 1024rem;
 
     opacity: 0.01;
     transition: opacity 500ms;
