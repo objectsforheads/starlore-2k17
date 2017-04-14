@@ -26,7 +26,7 @@ import stars from '../data/stars';
 
 export default {
   name: 'constellation',
-  props: ['constellation'],
+  props: ['constellation', 'offset'],
   data() {
     return {
       stars,
@@ -35,9 +35,16 @@ export default {
   computed: {
     starTransformer: function() {
       let ref = this.constellation;
+
+      let refOffset = this.offset;
+      var offset = [0,0];
+      if (refOffset) {
+        offset = [refOffset[0], refOffset[1]];
+      }
+
       return {
-        top: ref.top,
-        left: ref.left,
+        top: `calc(${ref.top} + ${offset[1]}px)`,
+        left: `calc(${ref.left} + ${offset[0]}px)`,
         width: `${parseFloat(ref.width) * ref.scale}%`,
         height: `${parseFloat(ref.height) * ref.scale}%`,
         transform: `rotate(${ref.rotation}deg)`
