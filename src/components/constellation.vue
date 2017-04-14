@@ -115,7 +115,7 @@ export default {
   background: white;
   pointer-events: none;
   cursor: pointer;
-  opacity: 0.33;
+  opacity: 0;
   transition: opacity 250ms;
 
   &::after {

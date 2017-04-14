@@ -5,8 +5,7 @@
     v-on:mousemove="starfieldMousemove"
     v-on:mouseup="starfieldMouseup">
     <canvas id="planisphere" width="4500" height="2048"></canvas>
-    <canvas id="star-tracker" width="4500" height="2048"></canvas>
-    <div class="planisphere" style="background: rgba(0,255,255,0.1);">
+    <div class="planisphere">
       <constellation v-for="constellation in constellations"
       v-bind:key="constellation.name"
       v-bind:constellation="constellation"
@@ -62,8 +61,6 @@ export default {
     let constellations = this.constellations;
 
     // // Track the star hitboxes
-    // let starTracker = document.getElementById('star-tracker').getContext('2d');
-    let test = document.getElementById('star-tracker').getContext('2d');
     let starTracker = this.starTracker;
 
     // Each constellation should be drawn in each quadrant
@@ -118,38 +115,7 @@ export default {
           return [xRotated, yRotated, [constellation.name, [quadrant[0], quadrant[1]]]];
         })
 
-        // If we did this right, we should be able to draw all the hitboxes from this
-        if (constellation.name === 'Virgo') {
-          test.save();
-          test.beginPath();
-          hitboxes.forEach(function(vertice, i) {
-            if (i === 0) {
-              test.moveTo(vertice[0], vertice[1]);
-            } else {
-              test.lineTo(vertice[0], vertice[1]);
-            }
-          })
-          test.closePath();
-          test.fillStyle = 'rgba(255, 0, 0, 0.1)';
-          test.fill();
-          test.restore();
-        }
-
         starTracker.push(hitboxes)
-
-        // starTracker.save();
-        // starTracker.translate(
-        //   moveX + (constellationWidth/2),
-        //   moveY + (constellationHeight/2)
-        // );
-        // starTracker.rotate((Math.PI/180) * constellation.rotation);
-        // starTracker.translate(
-        //   -(constellationWidth/2),
-        //   -(constellationHeight/2)
-        // );
-        // starTracker.fillStyle = 'rgba(0,255,255,0.25)';
-        // starTracker.fillRect(0, 0, constellationWidth, constellationHeight);
-        // starTracker.restore();
 
         let ownStars = stars[constellation.name].stars;
         let starRadius = 1;
@@ -163,10 +129,6 @@ export default {
             planisphere.arc(starX, starY, starRadius, 0, Math.PI * 2, false);
             planisphere.fillStyle = 'rgba(255,255,255,0.25)';
             planisphere.fill();
-            planisphere.arc(starX, starY, 20, 0, Math.PI * 2, false);
-            planisphere.fillStyle = 'rgba(0,0,0,0.01)';
-            planisphere.fill();
-            // planisphere.fillRect(0, 0, constellationWidth, constellationHeight);
           })
         }
         catch(err) {
@@ -302,19 +264,6 @@ export default {
       let x2 = x1 + windowWidth;
       let y2 = y1 + windowHeight;
 
-      // If done right, let's draw a test canvas
-      // let test = document.getElementById('star-tracker').getContext('2d');
-      // test.save();
-      // test.beginPath();
-      // test.moveTo(x1 + (windowWidth), y1 + (windowHeight));
-      // test.lineTo(x2 - (windowWidth), y1 + (windowHeight));
-      // test.lineTo(x2 - (windowWidth), y2 - (windowHeight));
-      // test.lineTo(x1 + (windowWidth), y2 - (windowHeight));
-      // test.closePath();
-      // test.fillStyle = 'rgba(255, 255, 255, 0.1)';
-      // test.fill();
-      // test.restore();
-
       // Check for visible constellations
       this.constellationVisibility = {};
       let constellationVisibility = this.constellationVisibility;
@@ -336,13 +285,9 @@ export default {
           if (visibilityTracker.indexOf(info[0]) === -1) {
             visibilityTracker.push(info[0]);
             constellationVisibility[info[0]] = info[1];
-          } else {
-            console.log(info[0])
           }
         }
       })
-
-      console.log(constellationVisibility)
     }
   }
 };
@@ -369,8 +314,6 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    //background: url('../assets/images/tmp.jpg');
-    background-size: 2250rem 1024rem;
 
     opacity: 0.01;
     transition: opacity 500ms;
@@ -385,12 +328,10 @@ export default {
   }
 }
 
-[id="planisphere"],
-[id="star-tracker"] {
+[id="planisphere"] {
   position: absolute;
   top: 0;
   left: 0;
-  pointer-events: none;
 }
 
 .planisphere {
