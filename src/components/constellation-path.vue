@@ -1,6 +1,7 @@
 <template>
   <path v-bind:data-timing="this.timing"
-  stroke="#ccc" stroke-width="1" fill="none"/>
+  stroke="#ccc" stroke-width="1" fill="none"
+  v-on:transitionend="constellationTransitionend" />
 </template>
 
 <script>
@@ -41,6 +42,11 @@ export default {
     //  Set up the starting positions (hide)
     path.style.strokeDasharray = length + ' ' + length;
     path.style.strokeDashoffset = length;
+  },
+  methods: {
+    constellationTransitionend: function() {
+      this.$emit('pathDrawn');
+    }
   }
 };
 </script>

@@ -2,6 +2,7 @@
   <div class="constellation"
   v-bind:data-name="constellation.name"
   v-on:mouseup="constellationMouseup"
+  v-bind:class="{ revealed: revealed }"
   v-bind:style="starTransformer">
     <template v-for="star in ownStars">
       <div class="star" v-bind:style="{
@@ -14,9 +15,13 @@
         template v-for="path in starPath"
         :key="constellation.name"
         :path="path.path"
-        :timing="path.timing">
+        :timing="path.timing"
+        v-on:pathDrawn="pathDrawn">
         </constellation-path>
     </svg>
+    <div class="art"
+    v-bind:style="constellationArt">
+    </div>
   </div>
 </template>
 
@@ -30,9 +35,25 @@ export default {
   data() {
     return {
       stars,
+      revealed: false,
+      paths: null,
+      drawn: 0
     };
   },
+  mounted: function() {
+    this.paths = this.starPath.length;
+  },
   computed: {
+    constellationArt: function() {
+      let name = this.constellation.name;
+      name = name.toLowerCase().replace(' ', '');
+
+      let path = `/static/images/constellations/constellation-bg_${name}.png`;
+      return {
+        background: `url('${path}') no-repeat center center`,
+        backgroundSize: 'contain'
+      };
+    },
     starTransformer: function() {
       let ref = this.constellation;
 
@@ -92,6 +113,12 @@ export default {
         return false;
       }
     },
+    pathDrawn: function() {
+      this.drawn += 1;
+      if (this.drawn === this.paths) {
+        this.revealed = true;
+      }
+    },
   }
 };
 </script>
@@ -105,6 +132,21 @@ export default {
     .star {
       opacity: 0.66;
     }
+  }
+
+  .art {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms 250ms;
+  }
+
+  &.revealed .art {
+    opacity: 1;
   }
 }
 
