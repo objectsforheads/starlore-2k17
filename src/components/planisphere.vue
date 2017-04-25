@@ -332,11 +332,31 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+  opacity: 0;
+  transition: opacity 250ms;
+
+  .viewing-sky & {
+    opacity: 1;
+  }
 }
 
 .planisphere {
   width: 2250rem;
   height: 1024rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+
+    opacity: 0.33;
+    background: url('../assets/images/galaxy.png');
+    background-size: 2250rem 1024rem;
+  }
 
   // Hidden by default
   opacity: 0;

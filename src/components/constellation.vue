@@ -114,9 +114,12 @@ export default {
       }
     },
     pathDrawn: function() {
-      this.drawn += 1;
-      if (this.drawn === this.paths) {
-        this.revealed = true;
+      let self = this;
+      self.drawn += 1;
+      if (self.drawn === self.paths) {
+        setTimeout(function() {
+          self.revealed = true;
+        }, 250)
       }
     },
   }
@@ -142,7 +145,7 @@ export default {
     height: 100%;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 250ms 250ms;
+    transition: opacity 250ms;
   }
 
   &.revealed .art {
