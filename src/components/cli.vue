@@ -19,6 +19,7 @@
 <script>
 /* eslint-disable */
 import { cliCommands } from '../data/commands.js';
+import { bus } from './bus.js';
 
 export default {
   name: 'gameCLI',
@@ -26,6 +27,10 @@ export default {
     let cli = this;
     window.addEventListener('keyup', (e) => {
       cli.windowKeyup(e)
+    })
+
+    bus.$on('constellationFound', function(constellation) {
+      cli.onConstellationFound(constellation);
     })
   },
   computed: {
@@ -300,6 +305,14 @@ export default {
 
       // reset the command after resolution
       return cli.command = null;
+    },
+    onConstellationFound: function(cliOutput) {
+      let cli = this;
+
+      return cli.outputToCLI(
+        cliOutput.outputter,
+        cliOutput.output
+      )
     }
   }
 };

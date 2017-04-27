@@ -28,6 +28,7 @@
 <script>
 /* eslint-disable */
 import stars from '../data/stars';
+import { bus } from './bus.js';
 
 export default {
   name: 'constellation',
@@ -42,6 +43,10 @@ export default {
   },
   mounted: function() {
     this.paths = this.starPath.length;
+
+    this.$store.commit('countConstellations', {
+      name: this.constellation.name
+    })
   },
   computed: {
     constellationArt: function() {
@@ -115,10 +120,22 @@ export default {
     },
     pathDrawn: function() {
       let self = this;
+      let state = self.$store.state
       self.drawn += 1;
       if (self.drawn === self.paths) {
         setTimeout(function() {
           self.revealed = true;
+          self.$store.commit('findConstellation', {
+            name: self.constellation.name
+          })
+
+          let remaining = state.totalConstellations - state.foundConstellationsCount;
+          let output = `You found ${self.constellation.name}. `
+          output += remaining > 1 ? `There are still ${remaining} constellations to be found.` : `There is but one constellation left undiscovered in the night sky.`
+          bus.$emit('constellationFound', {
+            outputter: 'event',
+            output: output
+          });
         }, 250)
       }
     },

@@ -12,6 +12,9 @@ export default new Vuex.Store({
     squirrelQuest: true,
     squirrelDebt: false,
     squirrelDebtCounter: 1,
+    totalConstellations: 0,
+    foundConstellations: {},
+    foundConstellationsCount: 0,
   },
   mutations: {
     booleanToggle(state, payload) {
@@ -25,6 +28,18 @@ export default new Vuex.Store({
     counterIncrement(state, payload) {
       const currentState = state;
       currentState[payload.qualifier] += payload.increment;
+    },
+    countConstellations(state, payload) {
+      const currentState = state;
+      currentState.totalConstellations += 1;
+      if (typeof currentState.foundConstellations[payload.name] === 'undefined') {
+        currentState.foundConstellations[payload.name] = false;
+      }
+    },
+    findConstellation(state, payload) {
+      const currentState = state;
+      currentState.foundConstellations[payload.name] = true;
+      currentState.foundConstellationsCount += 1;
     },
   },
 });
