@@ -13,6 +13,12 @@
         <span class="cli__command">&gt; {{ command }}<span class="cli__indicator a-blink">_</span></span>
       </div>
     </div>
+    <form class="cli__capturer"
+    v-on:submit="cliCapturerOnSubmit">
+      <input type="text" name="cli__capturer-input" class="cli__capturer-input" autofocus
+      v-on:input="cliCapturerInputOnInput"
+      v-on:blur="cliCapturerInputOnBlur" />
+    </form>
   </div>
 </template>
 
@@ -25,13 +31,13 @@ export default {
   name: 'gameCLI',
   created: function () {
     let cli = this;
-    window.addEventListener('keyup', (e) => {
-      cli.windowKeyup(e)
-    })
 
     bus.$on('constellationFound', function(constellation) {
       cli.onConstellationFound(constellation);
     })
+  },
+  mounted: function() {
+    document.querySelector('.cli__capturer-input').focus();
   },
   computed: {
     nounMatchedCommands: function() {
@@ -103,25 +109,23 @@ export default {
     }
   },
   methods: {
-    windowKeyup: function(e) {
+    cliCapturerInputOnInput: function(e) {
       let cli = this;
-      // If keypress is a character, let it through
-      if (e.key.length === 1) {
-        if (!cli.command) {
-          cli.command = e.key;
-        } else {
-          cli.command += e.key;
-        }
+      cli.command = e.currentTarget.value;
+    },
+    cliCapturerInputOnBlur: function(e) {
+      e.currentTarget.focus();
+    },
+    cliCapturerOnSubmit: function(e) {
+      let cli = this;
+
+      if (cli.command && cli.command.trim().length > 0) {
+        document.querySelector('.cli__capturer-input').value = null;
+        cli.processCommand();
       }
-      else if (e.key === 'Backspace') {
-        e.preventDefault();
-        cli.command = cli.command.slice(0, -1);
-      }
-      else if (e.key === 'Enter') {
-        if (cli.command && cli.command.trim().length > 0) {
-          cli.processCommand();
-        }
-      }
+
+      e.preventDefault();
+      return false;
     },
     processCommand: function() {
       let cli = this;
@@ -372,5 +376,11 @@ export default {
 
   .cli__input {
     overflow: auto;
+    white-space: pre-wrap;
+  }
+
+  .cli__capturer {
+    position: absolute;
+    opacity: 0;
   }
 </style>
