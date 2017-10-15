@@ -53,7 +53,7 @@ export default {
       let name = this.constellation.name;
       name = name.toLowerCase().replace(' ', '');
 
-      let path = `/static/images/constellations/constellation-bg_${name}.png`;
+      let path = `static/images/constellations/constellation-bg_${name}.png`;
       return {
         background: `url('${path}') no-repeat center center`,
         backgroundSize: 'contain'
