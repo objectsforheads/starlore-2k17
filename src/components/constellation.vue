@@ -54,11 +54,10 @@ export default {
       name = name.toLowerCase().replace(' ', '');
 
       let path = `/static/images/constellations/constellation-bg_${name}.png`;
-      return false;
-      // return {
-      //   background: `url('${path}') no-repeat center center`,
-      //   backgroundSize: 'contain'
-      // };
+      return {
+        background: `url('${path}') no-repeat center center`,
+        backgroundSize: 'contain'
+      };
     },
     starTransformer: function() {
       let ref = this.constellation;
