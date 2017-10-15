@@ -15,6 +15,7 @@ export default new Vuex.Store({
     totalConstellations: 0,
     foundConstellations: {},
     foundConstellationsCount: 0,
+    handbookOpen: true,
   },
   mutations: {
     booleanToggle(state, payload) {

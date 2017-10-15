@@ -54,10 +54,11 @@ export default {
       name = name.toLowerCase().replace(' ', '');
 
       let path = `/static/images/constellations/constellation-bg_${name}.png`;
-      return {
-        background: `url('${path}') no-repeat center center`,
-        backgroundSize: 'contain'
-      };
+      return false;
+      // return {
+      //   background: `url('${path}') no-repeat center center`,
+      //   backgroundSize: 'contain'
+      // };
     },
     starTransformer: function() {
       let ref = this.constellation;
@@ -131,7 +132,11 @@ export default {
 
           let remaining = state.totalConstellations - state.foundConstellationsCount;
           let output = `You found ${self.constellation.name}. `
-          output += remaining > 1 ? `There are still ${remaining} constellations to be found.` : `There is but one constellation left undiscovered in the night sky.`
+          if (remaining === 0) {
+            output += `Congratulations, you've found them all!`;
+          } else {
+            output += remaining > 1 ? `There are still ${remaining} constellations to be found.` : `There is but one constellation left undiscovered in the night sky.`
+          }
           bus.$emit('constellationFound', {
             outputter: 'event',
             output: output
