@@ -16,6 +16,7 @@ export default new Vuex.Store({
     foundConstellations: {},
     foundConstellationsCount: 0,
     handbookOpen: true,
+    activeConstellation: null,
   },
   mutations: {
     booleanToggle(state, payload) {
@@ -41,6 +42,10 @@ export default new Vuex.Store({
       const currentState = state;
       currentState.foundConstellations[payload.name] = true;
       currentState.foundConstellationsCount += 1;
+    },
+    setActiveConstellation(state, payload) {
+      const currentState = state;
+      currentState.activeConstellation = payload.name;
     },
   },
 });

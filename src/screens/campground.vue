@@ -1,17 +1,7 @@
 <template>
-  <div class="campground" v-bind:class="[isTutorial, isViewingSky]">
+  <div class="campground" v-bind:class="[isTutorial, isViewingSky, isNavigatingSky]">
     <planisphere></planisphere>
-    <div class="foreground">
-      <div class="mountains sprite"></div>
-      <div class="land sprite">
-        <div class="land--1"></div>
-        <div class="land--2"></div>
-        <div class="land--3"></div>
-        <div class="land--4"></div>
-        <div class="land--5"></div>
-      </div>
-      <div class="fire sprite"></div>
-    </div>
+    <handbook></handbook>
   </div>
 </template>
 
@@ -31,6 +21,12 @@
           return 'viewing-sky';
         }
         return false;
+      },
+      isNavigatingSky: function() {
+        if (this.$store.state.isNavigatingSky) {
+          return 'navigating-sky';
+        }
+        return false;
       }
     }
   }
@@ -39,14 +35,10 @@
 <style scoped lang="scss">
   // HACK really need a better way to import variables
   @import '../assets/styles/_globals';
-
-  [class*="-enter-active"] {
-    animation: fadeIn 50ms;
-  }
-
   .campground {
     width: 100%;
     height: 100%;
+    // animation: slideInUp 7500ms;
   }
 
   .foreground {

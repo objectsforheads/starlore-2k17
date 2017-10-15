@@ -2,7 +2,7 @@
   <div class="constellation"
   v-bind:data-name="constellation.name"
   v-on:mouseup="constellationMouseup"
-  v-bind:class="{ revealed: revealed }"
+  v-bind:class="[isRevealed, isActive]"
   v-bind:style="starTransformer">
     <template v-for="star in ownStars">
       <div class="star" v-bind:style="{
@@ -91,11 +91,28 @@ export default {
       // Error testing
       console.log(this.constellation.name);
       return false;
+    },
+    isRevealed: function() {
+      if (this.revealed) {
+        return 'revealed';
+      }
+      return false;
+    },
+    isActive: function() {
+      if (this.$store.state.activeConstellation === this.constellation.name) {
+        return 'active';
+      }
+      return false;
     }
   },
   methods: {
     constellationMouseup: function() {
       if (!this.$store.state.isNavigatingSky) {
+        let self = this;
+        self.$store.commit('setActiveConstellation', {
+          name: self.constellation.name
+        })
+
         let paths = this.$el.querySelectorAll('path');
         for (var i = 0; i < paths.length; i++) {
           let path = paths[i];
@@ -168,9 +185,14 @@ export default {
     opacity: 0;
     transition: opacity 250ms;
   }
+}
 
-  &.revealed .art {
-    opacity: 1;
+.viewing-sky:not(.navigating-sky) {
+  .revealed.active,
+  .revealed:hover {
+    .art {
+      opacity: 1;
+    }
   }
 }
 

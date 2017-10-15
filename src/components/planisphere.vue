@@ -294,6 +294,10 @@ export default {
 </script>
 
 <style lang="scss">
+  [class*="-enter-active"] {
+    animation: slideInUp 500ms;
+  }
+
 .starfield {
   z-index: 2;
   position: absolute;

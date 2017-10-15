@@ -57,5 +57,15 @@ export default {
   top: 0;
   left: 0;
   z-index: 0;
+  opacity: 0.25;
+  transition: opacity 250ms;
+}
+
+.active .constellation-line {
+  opacity: 1;
+}
+
+.navigating-sky .constellation-line {
+  opacity: 0;
 }
 </style>

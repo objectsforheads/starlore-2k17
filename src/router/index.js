@@ -10,6 +10,7 @@ import gameCLI from '@/components/cli';
 import planisphere from '@/components/planisphere';
 import constellation from '@/components/constellation';
 import constellationPath from '@/components/constellation-path';
+import handbook from '@/components/handbook';
 
 Vue.use(Router);
 Vue.use(Vuex);
@@ -25,3 +26,4 @@ Vue.component('game-cli', gameCLI);
 Vue.component('planisphere', planisphere);
 Vue.component('constellation', constellation);
 Vue.component('constellation-path', constellationPath);
+Vue.component('handbook', handbook);
