@@ -5,8 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isTutorial: true,
-    isViewingSky: false,
+    isTutorial: false,
+    isViewingSky: true,
     canNavigateSky: false,
     isNavigatingSky: false,
     squirrelQuest: true,

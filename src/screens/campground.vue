@@ -12,7 +12,6 @@
       </div>
       <div class="fire sprite"></div>
     </div>
-    <game-cli></game-cli>
   </div>
 </template>
 
@@ -52,7 +51,6 @@
 
   .foreground {
     height: 100%;
-    max-height: calc(100% - 175rem); // CLI height
 
     .sprite {
       transition: all 500ms ease-out;
@@ -133,6 +131,9 @@
   }
 
   .viewing-sky {
+    .foreground {
+      pointer-events: none;
+    }
     .foreground .sprite {
       font-size: 1rem;
     }
