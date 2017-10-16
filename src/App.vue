@@ -60,16 +60,16 @@ main {
 
 @font-face {
     font-family: 'upheaval';
-    src: url('../static/fonts/upheavtt-webfont.woff2') format('woff2'),
-         url('../static/fonts/upheavtt-webfont.woff') format('woff');
+    src: url('assets/fonts/upheavtt-webfont.woff2') format('woff2'),
+         url('assets/fonts/upheavtt-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'romulus';
-    src: url('../static/fonts/romulus-webfont.woff2') format('woff2'),
-         url('../static/fonts/romulus-webfont.woff') format('woff');
+    src: url('assets/fonts/romulus-webfont.woff2') format('woff2'),
+         url('assets/fonts/romulus-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
