@@ -35,7 +35,7 @@ export default new Vuex.Store({
       const currentState = state;
       currentState.totalConstellations += 1;
       if (typeof currentState.foundConstellations[payload.name] === 'undefined') {
-        currentState.foundConstellations[payload.name] = false;
+        Vue.set(currentState.foundConstellations, payload.name, false);
       }
     },
     findConstellation(state, payload) {
