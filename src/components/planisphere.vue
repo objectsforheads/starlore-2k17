@@ -203,7 +203,6 @@ export default {
   },
   methods: {
     starfieldMousedown: function(e) {
-      e.preventDefault();
       let self = this;
       let canMove = this.$store.state.isViewingSky;
       if (canMove) {
@@ -225,6 +224,10 @@ export default {
           self.$store.commit('booleanToggle', {
             qualifier: 'isNavigatingSky',
             boolean: true
+          })
+
+          self.$store.commit('setActiveConstellation', {
+            name: null
           })
         }
         if (isMoving) {

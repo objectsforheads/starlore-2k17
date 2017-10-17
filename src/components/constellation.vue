@@ -1,7 +1,7 @@
 <template>
   <div class="constellation"
   v-bind:data-name="constellation.name"
-  v-on:mouseup="constellationMouseup"
+  v-on:click="constellationMouseup"
   v-bind:class="[isRevealed, isActive]"
   v-bind:style="starTransformer">
     <template v-for="star in ownStars">
