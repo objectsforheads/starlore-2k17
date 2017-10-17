@@ -7,7 +7,7 @@
       <div class="manual__page-content">
         <ul>
           <template v-for="constellation in foundConstellations">
-            <li v-bind:data-constellation="constellation.name" class="manual__constellation-index">
+            <li v-bind:data-constellation="constellation.name" class="manual__constellation-index" v-bind:class="{'is-found': constellation.found}">
               {{ constellation.presentation }}
             </li>
           </template>
@@ -47,7 +47,8 @@
         for (var constellation in all) {
           constellations.push({
             name: constellation,
-            presentation: constellation
+            presentation: constellation.replace(/[a-zA-Z&]/g, '?'),
+            found: false
           });
         }
         constellations.sort(function(a, b) {
@@ -64,11 +65,12 @@
 
         // loop through each constellation and replace with the mystery if not found yet
         constellations.forEach(function(constellation, i) {
-          if (all[constellation.name] === false) {
-            let mystery = constellations[i];
-            mystery.presentation = constellation.presentation.replace(/[a-zA-Z&]/g, '?');
+          if (all[constellation.name] === true) {
+            let foundConstellation = constellations[i];
+            foundConstellation.presentation = foundConstellation.name;
+            foundConstellation.found = true;
 
-            Vue.set(constellations, i, constellations[i], mystery);
+            Vue.set(constellations, i, constellations[i], foundConstellation);
           }
         })
 
@@ -161,6 +163,17 @@
       height: 100%;
       width: 100%;
     }
+  }
+}
+
+.manual__constellation-index {
+  margin: 0 -1em;
+  padding: 0 1em;
+  opacity: 0.75;
+
+  &.is-found {
+    opacity: 1;
+    animation: blinkNoticeMe steps(1) 250ms 15 alternate;
   }
 }
 </style>

@@ -49,3 +49,18 @@
     transform: translate3d(0, -100%, 0);
   }
 }
+
+@keyframes blinkNoticeMe {
+  0% {
+    background: $g-palette_primary-white;
+    color: $g-palette_primary-dark;
+  }
+  50% {
+    background: $g-palette_primary-dark;
+    color: $g-palette_primary-white;
+  }
+  100% {
+    background: $g-palette_primary-white;
+    color: $g-palette_primary-dark;
+  }
+}

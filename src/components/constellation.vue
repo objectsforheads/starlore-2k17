@@ -29,6 +29,7 @@
 /* eslint-disable */
 import stars from '../data/stars';
 import { bus } from './bus.js';
+import zenscroll from 'zenscroll';
 
 export default {
   name: 'constellation',
@@ -146,8 +147,17 @@ export default {
             name: self.constellation.name
           })
 
-          let offsetManual = document.querySelector('.manual__constellation-index[data-constellation="' + state.activeConstellation + '"]').offsetTop;
-          document.querySelector('.manual__page-content').scrollTop = offsetManual;
+          // calculate a duration time
+          let manual = document.querySelector('.manual__page-content');
+          let manualEntry = document.querySelector('.manual__constellation-index[data-constellation="' + state.activeConstellation + '"]');
+          let offsetManual = manualEntry.offsetTop;
+          let currentOffsetManual = manual.scrollTop;
+          let totalOffset = Math.abs(offsetManual - currentOffsetManual);
+
+          // scroll to just found constellation
+          let manualScroll = zenscroll.createScroller(manual, totalOffset, 0);
+          manualScroll.center(manualEntry);
+
           let remaining = state.totalConstellations - state.foundConstellationsCount;
           let output = `You found ${self.constellation.name}. `
           if (remaining === 0) {
