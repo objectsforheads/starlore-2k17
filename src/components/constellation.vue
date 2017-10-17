@@ -146,6 +146,8 @@ export default {
             name: self.constellation.name
           })
 
+          let offsetManual = document.querySelector('.manual__constellation-index[data-constellation="' + state.activeConstellation + '"]').offsetTop;
+          document.querySelector('.manual__page-content').scrollTop = offsetManual;
           let remaining = state.totalConstellations - state.foundConstellationsCount;
           let output = `You found ${self.constellation.name}. `
           if (remaining === 0) {

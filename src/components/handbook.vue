@@ -6,9 +6,11 @@
       </button>
       <div class="manual__page-content">
         <ul>
-          <li v-for="constellation in foundConstellations">
-            {{ constellation }}
-          </li>
+          <template v-for="constellation in foundConstellations">
+            <li v-bind:data-constellation="constellation.name" class="manual__constellation-index">
+              {{ constellation.presentation }}
+            </li>
+          </template>
         </ul>
       </div>
     </div>
@@ -17,6 +19,8 @@
 
 <script>
   /* eslint-disable */
+  import Vue from 'vue';
+
   export default {
     name: 'manual',
     computed: {
@@ -39,12 +43,37 @@
       foundConstellations: function() {
         let constellations = [];
         let all = this.$store.state.foundConstellations;
+        // push all constellations to the array first and sort alphabetically
         for (var constellation in all) {
-          constellations.push(constellation);
+          constellations.push({
+            name: constellation,
+            presentation: constellation
+          });
         }
-        constellations.sort();
+        constellations.sort(function(a, b) {
+          if (a.name < b.name) {
+            return -1;
+          }
+
+          if (b.name < a.name) {
+            return 1;
+          }
+
+          return 0;
+        });
+
+        // loop through each constellation and replace with the mystery if not found yet
+        constellations.forEach(function(constellation, i) {
+          if (all[constellation.name] === false) {
+            let mystery = constellations[i];
+            mystery.presentation = constellation.presentation.replace(/[a-zA-Z&]/g, '?');
+
+            Vue.set(constellations, i, constellations[i], mystery);
+          }
+        })
+
         return constellations;
-      }
+      },
     },
     methods: {
       handbookToggleClick: function() {
